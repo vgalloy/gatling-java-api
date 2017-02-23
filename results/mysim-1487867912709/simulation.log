@@ -1,0 +1,4 @@
+RUN	com.vgalloy.gatlingjavaapi.io.gatling.app.MySim		mysim	1487867912709	 	2.0
+USER	MyScenario	1	START	1487867914962	1487867914962
+REQUEST	MyScenario	1		request_1	1487867915051	1487867915051	KO	j.n.ConnectException: Connection refused: no further information: localhost/0:0:0:0:0:0:0:1:8082
+USER	MyScenario	1	END	1487867914962	1487867917085

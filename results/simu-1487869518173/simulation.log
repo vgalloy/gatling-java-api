@@ -1,0 +1,4 @@
+RUN	com.vgalloy.gatlingjavaapi.comp.Simu		simu	1487869518173	 	2.0
+GROUP	Failed to build request request_1: url <function1> can't be parsed into a URI: host 	1487869519508
+USER	MyScenario	1	END	1487869519497	1487869519513
+USER	MyScenario	1	START	1487869519497	1487869519497
