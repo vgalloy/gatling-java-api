@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+group = 'com.vgalloy'
+version = '1.0-SNAPSHOT'
+
+ext {
+    javaVersion = '1.8'
+    gatlingVersion = '2.2.3'
+    junitVersion = '4.12'
+    springBootversion = '1.5.1.RELEASE'
+}
+
+sourceCompatibility = "$javaVersion"
+targetCompatibility = "$javaVersion"
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "${project.group}"
+            artifactId "gatling-java-api"
+            version "${project.version}"
+
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    compile "io.gatling:gatling-core:$gatlingVersion"
+    compile "io.gatling:gatling-http:$gatlingVersion"
+    compile "io.gatling:gatling-app:$gatlingVersion"
+    compile "io.gatling:gatling-recorder:$gatlingVersion"
+    compile "io.gatling:gatling-charts:$gatlingVersion"
+    compile "io.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-web:$springBootversion"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootversion"
+}

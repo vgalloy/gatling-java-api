@@ -1,4 +1,0 @@
-RUN	com.vgalloy.gatlingjavaapi.comp.Simu		simu	1487869481127	 	2.0
-USER	MyScenario	1	START	1487869482513	1487869482513
-REQUEST	MyScenario	1		request_1	1487869482552	1487869482552	KO	j.n.ConnectException: Connection refused: no further information: localhost/127.0.0.1:8082
-USER	MyScenario	1	END	1487869482513	1487869484581

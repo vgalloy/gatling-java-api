@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home() {
+	public String home() throws Exception {
+		Thread.sleep(500);
 		return "home";
 	}
 }

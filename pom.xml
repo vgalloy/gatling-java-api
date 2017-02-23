@@ -15,6 +15,13 @@
 
         <!-- Maven -->
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+
+        <!-- Gatling -->
+        <gatling.version>2.2.3</gatling.version>
+
+        <!-- Test -->
+        <junit.version>4.12</junit.version>
+        <spring-boot.version>1.5.1.RELEASE</spring-boot.version>
     </properties>
 
 
@@ -22,39 +29,49 @@
         <dependency>
             <groupId>io.gatling</groupId>
             <artifactId>gatling-core</artifactId>
-            <version>2.2.3</version>
+            <version>${gatling.version}</version>
         </dependency>
         <dependency>
             <groupId>io.gatling</groupId>
             <artifactId>gatling-http</artifactId>
-            <version>2.2.3</version>
+            <version>${gatling.version}</version>
         </dependency>
         <dependency>
             <groupId>io.gatling</groupId>
             <artifactId>gatling-app</artifactId>
-            <version>2.2.3</version>
+            <version>${gatling.version}</version>
         </dependency>
         <dependency>
             <groupId>io.gatling</groupId>
             <artifactId>gatling-recorder</artifactId>
-            <version>2.2.3</version>
+            <version>${gatling.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-charts</artifactId>
+            <version>${gatling.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.5.1.RELEASE</version>
+            <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.5.1.RELEASE</version>
+            <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
