@@ -7,10 +7,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * Created by Vincent Galloy on 28/02/2017.
+ *
  * @author Vincent Galloy.
- *         Created by Vincent Galloy on 28/02/2017.
  */
-public class ScalaHelperTest {
+public final class ScalaHelperTest {
 
     @Test
     public void orderArray() {

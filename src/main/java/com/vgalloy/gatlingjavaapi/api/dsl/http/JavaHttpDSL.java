@@ -5,7 +5,9 @@ import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrappe
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.Expression;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import io.gatling.core.check.ValidatorCheckBuilder;
 import io.gatling.http.Predef;
+import io.gatling.http.check.status.HttpStatusCheckBuilder;
 import io.gatling.http.request.builder.Http;
 
 /**
@@ -22,6 +24,8 @@ public final class JavaHttpDSL {
     private JavaHttpDSL() {
         throw new AssertionError();
     }
+
+    public static final ValidatorCheckBuilder status = HttpStatusCheckBuilder.Status().find();
 
     public static HttpWrapper http(String requestName) {
         Expression<String> requestExpression = ScalaHelper.toExpression(requestName);

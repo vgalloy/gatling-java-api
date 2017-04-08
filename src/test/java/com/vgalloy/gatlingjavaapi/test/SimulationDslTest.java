@@ -13,7 +13,7 @@ import org.junit.Test;
  *
  * @author Vincent Galloy.
  */
-public class SimulationDslTest {
+public final class SimulationDslTest {
 
     @Test
     public void simple() {

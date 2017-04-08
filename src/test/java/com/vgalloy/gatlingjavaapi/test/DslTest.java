@@ -7,10 +7,11 @@ import io.gatling.commons.stats.assertion.Assertion;
 import org.junit.Test;
 
 /**
+ * Created by Vincent Galloy on 28/02/2017.
+ *
  * @author Vincent Galloy.
- *         Created by Vincent Galloy on 28/02/2017.
  */
-public class DslTest {
+public final class DslTest {
 
     @Test(expected = NullPointerException.class)
     public void nullInjector() {

@@ -13,7 +13,7 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
  *
  * @author Vincent Galloy.
  */
-public class MultiScenariosSimulation extends SimulationWrapper {
+public final class MultiScenariosSimulation extends SimulationWrapper {
 
     public static int port = 8082;
 
