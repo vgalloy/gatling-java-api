@@ -1,8 +1,8 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
 
-import io.gatling.core.structure.StructureBuilder;
-
 import java.util.function.Supplier;
+
+import io.gatling.core.structure.StructureBuilder;
 
 /**
  * @author Vincent Galloy.
@@ -10,5 +10,5 @@ import java.util.function.Supplier;
  */
 public interface ExecsWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>> extends Supplier<STRUCTURE> {
 
-	WRAPPER newInstance(STRUCTURE newStructure);
+    WRAPPER newInstance(STRUCTURE newStructure);
 }

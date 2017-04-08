@@ -10,9 +10,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 @SpringBootApplication
 public class TestServerConfig {
 
-	public static void main(String[] args) {
-		new SpringApplicationBuilder(TestServerConfig.class)
-				.run(args);
-	}
-
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(TestServerConfig.class)
+                .run(args);
+    }
 }

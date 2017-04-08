@@ -11,8 +11,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     javaVersion = '1.8'
-    gatlingVersion = '2.2.3'
-    junitVersion = '4.12'
+    gatlingVersion = '2.2.4'
     springBootversion = '1.5.1.RELEASE'
 }
 
@@ -39,7 +38,6 @@ dependencies {
     compile "io.gatling:gatling-charts:$gatlingVersion"
     compile "io.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
 
-    testCompile "junit:junit:$junitVersion"
     testCompile "org.springframework.boot:spring-boot-starter-web:$springBootversion"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootversion"
 }

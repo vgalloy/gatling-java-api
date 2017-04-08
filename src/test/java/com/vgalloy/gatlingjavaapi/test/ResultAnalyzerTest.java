@@ -30,43 +30,43 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
 @SpringBootTest(classes = TestServerConfig.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ResultAnalyzerTest {
 
-	@LocalServerPort
-	private int serverPort;
+    @LocalServerPort
+    private int serverPort;
 
-	@Test
-	public void simple() {
-		AssertionSimulation.port = serverPort;
-		RunResult runResult = JavaGatlingRunner.getInstance().run(AssertionSimulation.class);
-		SimulationResult simulationResult = JavaGatlingResultAnalyzer.getInstance().load(runResult);
+    @Test
+    public void simple() {
+        AssertionSimulation.port = serverPort;
+        RunResult runResult = JavaGatlingRunner.getInstance().run(AssertionSimulation.class);
+        SimulationResult simulationResult = JavaGatlingResultAnalyzer.getInstance().load(runResult);
 
-		Assert.assertFalse(simulationResult.isSuccess());
-		JavaGatlingResultAnalyzer.getInstance().generateHtml(runResult);
-	}
+        Assert.assertFalse(simulationResult.isSuccess());
+        JavaGatlingResultAnalyzer.getInstance().generateHtml(runResult);
+    }
 
-	@Test
-	public void generation() {
+    @Test
+    public void generation() {
 
-		JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
-		JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
+        JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
+        JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 
-		ScenarioBuilderWrapper scn = scenario("MyScenario")
-				.exec(http("request_1")
-						.get("/home"));
-		HttpProtocolBuilderWrapper httpConf = http()
-				.baseURL("http://localhost:" + serverPort);
+        ScenarioBuilderWrapper scn = scenario("MyScenario")
+                .exec(http("request_1")
+                        .get("/home"));
+        HttpProtocolBuilderWrapper httpConf = http()
+                .baseURL("http://localhost:" + serverPort);
 
-		JavaSimulation javaSimulation = JavaSimulation.builder()
-				.scenario(
-						scn.inject(atOnceUsers(2))
-				)
-				.protocols(httpConf)
-				.assertion(
-						global().responseTime().max().lt(2),
-						global().successfulRequests().percent().gt(105d)
-				)
-				.build();
+        JavaSimulation javaSimulation = JavaSimulation.builder()
+                .scenario(
+                        scn.inject(atOnceUsers(2))
+                )
+                .protocols(httpConf)
+                .assertion(
+                        global().responseTime().max().lt(2),
+                        global().successfulRequests().percent().gt(105d)
+                )
+                .build();
 
-		RunResult runResult = javaGatlingRunner.run(javaSimulation);
-		javaGatlingResultAnalyzer.generateHtml(runResult);
-	}
+        RunResult runResult = javaGatlingRunner.run(javaSimulation);
+        javaGatlingResultAnalyzer.generateHtml(runResult);
+    }
 }

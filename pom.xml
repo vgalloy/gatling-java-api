@@ -17,11 +17,10 @@
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 
         <!-- Gatling -->
-        <gatling.version>2.2.3</gatling.version>
+        <gatling.version>2.2.4</gatling.version>
 
         <!-- Test -->
-        <junit.version>4.12</junit.version>
-        <spring-boot.version>1.5.1.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.2.RELEASE</spring-boot.version>
     </properties>
 
 
@@ -55,12 +54,6 @@
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

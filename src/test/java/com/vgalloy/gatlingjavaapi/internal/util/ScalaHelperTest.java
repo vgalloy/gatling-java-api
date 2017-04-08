@@ -1,10 +1,10 @@
 package com.vgalloy.gatlingjavaapi.internal.util;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Vincent Galloy.
@@ -12,27 +12,27 @@ import java.util.List;
  */
 public class ScalaHelperTest {
 
-	@Test
-	public void orderArray() {
-		// GIVEN
-		Integer[] array = new Integer[]{1, 2, 3};
+    @Test
+    public void orderArray() {
+        // GIVEN
+        Integer[] array = new Integer[]{1, 2, 3};
 
-		// WHEN
-		scala.collection.immutable.List<Integer> result = ScalaHelper.map(array);
+        // WHEN
+        scala.collection.immutable.List<Integer> result = ScalaHelper.map(array);
 
-		// THEN
-		Assert.assertEquals(Integer.valueOf(1), result.apply(0));
-	}
+        // THEN
+        Assert.assertEquals(Integer.valueOf(1), result.apply(0));
+    }
 
-	@Test
-	public void orderList() {
-		// GIVEN
-		List<Integer> list = Arrays.asList(1, 2, 3);
+    @Test
+    public void orderList() {
+        // GIVEN
+        List<Integer> list = Arrays.asList(1, 2, 3);
 
-		// WHEN
-		scala.collection.immutable.List<Integer> result = list.stream().collect(ScalaHelper.toScalaList());
+        // WHEN
+        scala.collection.immutable.List<Integer> result = list.stream().collect(ScalaHelper.toScalaList());
 
-		// THEN
-		Assert.assertEquals(Integer.valueOf(1), result.apply(0));
-	}
+        // THEN
+        Assert.assertEquals(Integer.valueOf(1), result.apply(0));
+    }
 }

@@ -11,11 +11,11 @@ import io.gatling.core.scenario.Simulation;
  */
 public interface JavaGatlingRunner {
 
-	RunResult run(Class<? extends Simulation> simulationClass);
+    static JavaGatlingRunner getInstance() {
+        return JavaGatlingRunnerImpl.INSTANCE;
+    }
 
-	RunResult run(JavaSimulation javaSimulation);
+    RunResult run(Class<? extends Simulation> simulationClass);
 
-	static JavaGatlingRunner getInstance() {
-		return JavaGatlingRunnerImpl.INSTANCE;
-	}
+    RunResult run(JavaSimulation javaSimulation);
 }

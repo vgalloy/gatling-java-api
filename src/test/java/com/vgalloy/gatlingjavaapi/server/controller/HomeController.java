@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home() throws Exception {
-		Thread.sleep(500);
-		return "home";
-	}
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String home() throws Exception {
+        Thread.sleep(100);
+        return "home";
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    public String post() throws Exception {
+        return "post";
+    }
 }

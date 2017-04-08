@@ -10,15 +10,15 @@ import io.gatling.core.assertion.AssertionWithPath;
  */
 public final class JavaAssertionSupport {
 
-	/**
-	 * Constructor.
-	 * To prevent instantiation
-	 */
-	private JavaAssertionSupport() {
-		throw new AssertionError();
-	}
+    /**
+     * Constructor.
+     * To prevent instantiation
+     */
+    private JavaAssertionSupport() {
+        throw new AssertionError();
+    }
 
-	public static AssertionWithPath global() {
-		return Predef.global(GatlingConfigurationSupplier.GATLING_CONFIGURATION);
-	}
+    public static AssertionWithPath global() {
+        return Predef.global(GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+    }
 }

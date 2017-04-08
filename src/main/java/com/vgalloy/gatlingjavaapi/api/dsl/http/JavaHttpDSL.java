@@ -15,20 +15,20 @@ import io.gatling.http.request.builder.Http;
  */
 public final class JavaHttpDSL {
 
-	/**
-	 * Constructor.
-	 * To prevent external instantiation
-	 */
-	private JavaHttpDSL() {
-		throw new AssertionError();
-	}
+    /**
+     * Constructor.
+     * To prevent external instantiation
+     */
+    private JavaHttpDSL() {
+        throw new AssertionError();
+    }
 
-	public static HttpWrapper http(String requestName) {
-		Expression<String> requestExpression = ScalaHelper.toExpression(requestName);
-		return new HttpWrapper(new Http(requestExpression));
-	}
+    public static HttpWrapper http(String requestName) {
+        Expression<String> requestExpression = ScalaHelper.toExpression(requestName);
+        return new HttpWrapper(new Http(requestExpression));
+    }
 
-	public static HttpProtocolBuilderWrapper http() {
-		return new HttpProtocolBuilderWrapper(Predef.http(GatlingConfigurationSupplier.GATLING_CONFIGURATION));
-	}
+    public static HttpProtocolBuilderWrapper http() {
+        return new HttpProtocolBuilderWrapper(Predef.http(GatlingConfigurationSupplier.GATLING_CONFIGURATION));
+    }
 }

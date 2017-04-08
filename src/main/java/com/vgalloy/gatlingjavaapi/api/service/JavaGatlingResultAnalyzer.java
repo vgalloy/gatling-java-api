@@ -10,11 +10,11 @@ import io.gatling.app.RunResult;
  */
 public interface JavaGatlingResultAnalyzer {
 
-	SimulationResult load(RunResult runResult);
+    static JavaGatlingResultAnalyzer getInstance() {
+        return JavaGatlingResultAnalyzerImpl.INSTANCE;
+    }
 
-	void generateHtml(RunResult runResult);
+    SimulationResult load(RunResult runResult);
 
-	static JavaGatlingResultAnalyzer getInstance() {
-		return JavaGatlingResultAnalyzerImpl.INSTANCE;
-	}
+    void generateHtml(RunResult runResult);
 }

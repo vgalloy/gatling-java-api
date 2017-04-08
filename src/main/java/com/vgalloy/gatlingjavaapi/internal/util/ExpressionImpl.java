@@ -12,14 +12,14 @@ import scala.runtime.AbstractFunction1;
 
 public final class ExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>> implements Expression<TYPE> {
 
-	private final TYPE object;
+    private final TYPE object;
 
-	ExpressionImpl(TYPE object) {
-		this.object = object;
-	}
+    ExpressionImpl(TYPE object) {
+        this.object = object;
+    }
 
-	@Override
-	public Validation<TYPE> apply(Session v1) {
-		return new io.gatling.commons.validation.Success<>(object);
-	}
+    @Override
+    public Validation<TYPE> apply(Session v1) {
+        return new io.gatling.commons.validation.Success<>(object);
+    }
 }

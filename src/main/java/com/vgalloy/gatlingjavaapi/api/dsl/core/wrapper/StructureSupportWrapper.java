@@ -1,8 +1,8 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
 
-import io.gatling.core.structure.ChainBuilder;
-
 import java.util.Objects;
+
+import io.gatling.core.structure.ChainBuilder;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -11,19 +11,19 @@ import java.util.Objects;
  */
 public class StructureSupportWrapper implements StructureBuilderWrapper<ChainBuilder, StructureSupportWrapper> {
 
-	private final ChainBuilder chainBuilder;
+    private final ChainBuilder chainBuilder;
 
-	public StructureSupportWrapper(ChainBuilder chainBuilder) {
-		this.chainBuilder = Objects.requireNonNull(chainBuilder);
-	}
+    public StructureSupportWrapper(ChainBuilder chainBuilder) {
+        this.chainBuilder = Objects.requireNonNull(chainBuilder);
+    }
 
-	@Override
-	public StructureSupportWrapper newInstance(ChainBuilder newStructure) {
-		return new StructureSupportWrapper(newStructure);
-	}
+    @Override
+    public StructureSupportWrapper newInstance(ChainBuilder newStructure) {
+        return new StructureSupportWrapper(newStructure);
+    }
 
-	@Override
-	public ChainBuilder get() {
-		return chainBuilder;
-	}
+    @Override
+    public ChainBuilder get() {
+        return chainBuilder;
+    }
 }

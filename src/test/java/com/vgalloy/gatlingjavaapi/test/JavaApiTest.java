@@ -29,36 +29,36 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
 @SpringBootTest(classes = TestServerConfig.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class JavaApiTest {
 
-	@LocalServerPort
-	private int serverPort;
+    @LocalServerPort
+    private int serverPort;
 
-	@Test
-	public void full() {
-		JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
-		JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
+    @Test
+    public void full() {
+        JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
+        JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 
-		ScenarioBuilderWrapper scn = scenario("MyScenario")
-				.exec(http("request_1")
-						.get("/home"));
-		HttpProtocolBuilderWrapper httpConf = http()
-				.baseURL("http://localhost:" + serverPort);
+        ScenarioBuilderWrapper scn = scenario("MyScenario")
+                .exec(http("request_1")
+                        .get("/home"));
+        HttpProtocolBuilderWrapper httpConf = http()
+                .baseURL("http://localhost:" + serverPort);
 
-		JavaSimulation javaSimulation = JavaSimulation.builder()
-				.scenario(
-						scn.inject(atOnceUsers(2))
-				)
-				.protocols(httpConf)
-				.assertion(
-						global().responseTime().max().lt(2),
-						global().successfulRequests().percent().gt(105d)
-				)
-				.build();
+        JavaSimulation javaSimulation = JavaSimulation.builder()
+                .scenario(
+                        scn.inject(atOnceUsers(2))
+                )
+                .protocols(httpConf)
+                .assertion(
+                        global().responseTime().max().lt(2),
+                        global().successfulRequests().percent().gt(105d)
+                )
+                .build();
 
-		RunResult runResult = javaGatlingRunner.run(javaSimulation);
-		SimulationResult simulationResult = javaGatlingResultAnalyzer.load(runResult);
+        RunResult runResult = javaGatlingRunner.run(javaSimulation);
+        SimulationResult simulationResult = javaGatlingResultAnalyzer.load(runResult);
 
-		// THEN
-		javaGatlingResultAnalyzer.generateHtml(runResult);
-		Assert.assertFalse(simulationResult.isSuccess());
-	}
+        // THEN
+        javaGatlingResultAnalyzer.generateHtml(runResult);
+        Assert.assertFalse(simulationResult.isSuccess());
+    }
 }
