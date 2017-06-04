@@ -11,8 +11,8 @@ version = '1.0-SNAPSHOT'
 
 ext {
     javaVersion = '1.8'
-    gatlingVersion = '2.2.4'
-    springBootversion = '1.5.1.RELEASE'
+    gatlingVersion = '2.2.5'
+    springBootversion = '1.5.3.RELEASE'
 }
 
 sourceCompatibility = "$javaVersion"
@@ -31,11 +31,6 @@ publishing {
 }
 
 dependencies {
-    compile "io.gatling:gatling-core:$gatlingVersion"
-    compile "io.gatling:gatling-http:$gatlingVersion"
-    compile "io.gatling:gatling-app:$gatlingVersion"
-    compile "io.gatling:gatling-recorder:$gatlingVersion"
-    compile "io.gatling:gatling-charts:$gatlingVersion"
     compile "io.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
 
     testCompile "org.springframework.boot:spring-boot-starter-web:$springBootversion"

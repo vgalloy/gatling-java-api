@@ -17,39 +17,14 @@
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 
         <!-- Gatling -->
-        <gatling.version>2.2.4</gatling.version>
+        <gatling.version>2.2.5</gatling.version>
 
         <!-- Test -->
-        <spring-boot.version>1.5.2.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.3.RELEASE</spring-boot.version>
     </properties>
 
 
     <dependencies>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-core</artifactId>
-            <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-http</artifactId>
-            <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-app</artifactId>
-            <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-recorder</artifactId>
-            <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-charts</artifactId>
-            <version>${gatling.version}</version>
-        </dependency>
         <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
