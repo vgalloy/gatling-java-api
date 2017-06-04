@@ -15,7 +15,7 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
  */
 public final class SimpleSimulation extends SimulationWrapper {
 
-    public static int port = 8082;
+    static int port = 8082;
 
     @Override
     protected void configure() {

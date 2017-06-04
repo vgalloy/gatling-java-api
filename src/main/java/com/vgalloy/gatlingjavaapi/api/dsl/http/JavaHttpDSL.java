@@ -17,6 +17,8 @@ import io.gatling.http.request.builder.Http;
  */
 public final class JavaHttpDSL {
 
+    public static final ValidatorCheckBuilder status = HttpStatusCheckBuilder.Status().find();
+
     /**
      * Constructor.
      * To prevent external instantiation
@@ -24,8 +26,6 @@ public final class JavaHttpDSL {
     private JavaHttpDSL() {
         throw new AssertionError();
     }
-
-    public static final ValidatorCheckBuilder status = HttpStatusCheckBuilder.Status().find();
 
     public static HttpWrapper http(String requestName) {
         Expression<String> requestExpression = ScalaHelper.toExpression(requestName);

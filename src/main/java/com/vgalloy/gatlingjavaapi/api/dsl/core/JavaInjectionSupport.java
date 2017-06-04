@@ -7,8 +7,9 @@ import io.gatling.core.controller.inject.InjectionStep;
 import scala.concurrent.duration.FiniteDuration;
 
 /**
+ * Created by Vincent Galloy on 27/02/2017.
+ *
  * @author Vincent Galloy.
- *         Created by Vincent Galloy on 27/02/2017.
  */
 public final class JavaInjectionSupport {
 

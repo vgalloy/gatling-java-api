@@ -28,8 +28,8 @@ public abstract class SimulationWrapper extends Simulation {
         Objects.requireNonNull(populationBuilderWrappers);
 
         scala.collection.immutable.List<PopulationBuilder> result = Arrays.stream(populationBuilderWrappers)
-                .map(PopulationBuilderWrapper::get)
-                .collect(ScalaHelper.toScalaList());
+            .map(PopulationBuilderWrapper::get)
+            .collect(ScalaHelper.toScalaList());
         return new SetUpWrapper(setUp(result));
     }
 
@@ -45,9 +45,9 @@ public abstract class SimulationWrapper extends Simulation {
             Objects.requireNonNull(httpProtocolBuilderWrapper);
 
             scala.collection.immutable.List<Protocol> result = Arrays.stream(httpProtocolBuilderWrapper)
-                    .map(HttpProtocolBuilderWrapper::get)
-                    .map(HttpProtocolBuilder::build)
-                    .collect(ScalaHelper.toScalaList());
+                .map(HttpProtocolBuilderWrapper::get)
+                .map(HttpProtocolBuilder::build)
+                .collect(ScalaHelper.toScalaList());
             return new SetUpWrapper(setUp.protocols(result));
         }
 

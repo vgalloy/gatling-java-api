@@ -5,8 +5,9 @@ import io.gatling.core.Predef;
 import io.gatling.core.assertion.AssertionWithPath;
 
 /**
+ * Created by Vincent Galloy on 27/02/2017.
+ *
  * @author Vincent Galloy.
- *         Created by Vincent Galloy on 27/02/2017.
  */
 public final class JavaAssertionSupport {
 

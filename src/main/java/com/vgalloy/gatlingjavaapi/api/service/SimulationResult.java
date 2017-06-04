@@ -32,9 +32,9 @@ public final class SimulationResult {
 
     public boolean isSuccess() {
         return getAssertionResult().stream()
-                .map(AssertionResult::result)
-                .filter(e -> !e)
-                .findFirst()
-                .orElse(true);
+            .map(AssertionResult::result)
+            .filter(e -> !e)
+            .findFirst()
+            .orElse(true);
     }
 }

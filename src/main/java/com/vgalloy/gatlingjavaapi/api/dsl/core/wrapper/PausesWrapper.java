@@ -7,8 +7,9 @@ import io.gatling.core.structure.StructureBuilder;
 import scala.concurrent.duration.Duration;
 
 /**
+ * Created by Vincent Galloy on 28/02/2017.
+ *
  * @author Vincent Galloy.
- *         Created by Vincent Galloy on 28/02/2017.
  */
 public interface PausesWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>> extends ExecsWrapper<STRUCTURE, WRAPPER> {
 

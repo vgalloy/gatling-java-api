@@ -10,7 +10,7 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
  */
 public class InternalSimulationWrapper extends SimulationWrapper {
 
-    public static JavaSimulation javaSimulation;
+    static JavaSimulation javaSimulation;
 
     @Override
     protected void configure() {
