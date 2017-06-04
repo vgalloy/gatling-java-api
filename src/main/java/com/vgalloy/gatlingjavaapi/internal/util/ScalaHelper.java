@@ -41,7 +41,7 @@ public final class ScalaHelper {
         scala.collection.immutable.Map<A, B> result = new scala.collection.immutable.HashMap<A, B>().empty();
         for (Map.Entry<A, B> entry : map.entrySet()) {
             Tuple2<A, B> newElement = new Tuple2<>(entry.getKey(), entry.getValue());
-            result.$plus(newElement);
+            result = result.$plus(newElement);
         }
         return result;
     }

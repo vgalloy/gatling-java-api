@@ -1,7 +1,9 @@
 package com.vgalloy.gatlingjavaapi.internal.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,5 +37,22 @@ public final class ScalaHelperTest {
 
         // THEN
         Assert.assertEquals(Integer.valueOf(1), result.apply(0));
+    }
+
+    @Test
+    public void mapConversion() {
+        // GIVEN
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "one");
+        map.put(2, "two");
+        map.put(3, "three");
+
+        // WHEN
+        scala.collection.immutable.Map<Integer, String> result = ScalaHelper.map(map);
+
+        // THEN
+        Assert.assertEquals("one", result.apply(1));
+        Assert.assertEquals("two", result.apply(2));
+        Assert.assertEquals("three", result.apply(3));
     }
 }
