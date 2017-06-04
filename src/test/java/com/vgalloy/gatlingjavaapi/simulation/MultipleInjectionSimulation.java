@@ -22,18 +22,18 @@ public final class MultipleInjectionSimulation extends SimulationWrapper {
     @Override
     protected void configure() {
         HttpProtocolBuilderWrapper httpConf = http()
-                .baseURL("http://localhost:" + 9999);
+            .baseURL("http://localhost:" + 9999);
 
         ScenarioBuilderWrapper scn = scenario("MyScenario")
-                .exec(http("request_1")
-                        .get("/home"));
+            .exec(http("request_1")
+                .get("/home"));
 
         setUp(
-                scn.inject(
-                        atOnceUsers(10),
-                        nothingFor(100, TimeUnit.MICROSECONDS),
-                        rampUsers(10, 1, TimeUnit.SECONDS)
-                )
+            scn.inject(
+                atOnceUsers(10),
+                nothingFor(100, TimeUnit.MICROSECONDS),
+                rampUsers(10, 1, TimeUnit.SECONDS)
+            )
         ).protocols(httpConf);
     }
 }

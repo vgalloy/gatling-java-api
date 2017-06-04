@@ -4,8 +4,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
+import io.gatling.core.body.Body;
+import io.gatling.core.body.StringBody;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
 
@@ -46,6 +49,13 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
         Objects.requireNonNull(value);
 
         return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(Expressions.of(name), Expressions.of(value)));
+    }
+
+    public HttpRequestBuilderWrapper body(String body) {
+        Objects.requireNonNull(body);
+
+        Body stringBody = new StringBody(Expressions.of(body), GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+        return new HttpRequestBuilderWrapper(httpRequestBuilder.body(stringBody));
     }
 
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {
