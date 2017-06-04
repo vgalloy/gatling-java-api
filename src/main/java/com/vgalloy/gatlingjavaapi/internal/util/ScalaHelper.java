@@ -3,15 +3,9 @@ package com.vgalloy.gatlingjavaapi.internal.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import scala.Tuple2;
@@ -26,16 +20,13 @@ public final class ScalaHelper {
 
     /**
      * Constructor.
-     * To prevent external instantiation
+     * To prevent instantiation
      */
     private ScalaHelper() {
         throw new AssertionError();
     }
 
-    public static <T> Expression<T> toExpression(T item) {
-        return new ExpressionImpl<>(item);
-    }
-
+    @SafeVarargs
     public static <T> scala.collection.immutable.List<T> map(T... elementList) {
         Objects.requireNonNull(elementList);
         return Arrays.stream(elementList)
@@ -56,40 +47,20 @@ public final class ScalaHelper {
     }
 
     public static <T> Collector<T, List<T>, scala.collection.immutable.List<T>> toScalaList() {
-        return new Collector<T, List<T>, scala.collection.immutable.List<T>>() {
-            @Override
-            public Supplier<List<T>> supplier() {
-                return ArrayList::new;
+        return Collector.of(
+            ArrayList::new,
+            List::add,
+            (left, right) -> {
+                left.addAll(right);
+                return left;
+            },
+            (list) -> {
+                Collections.reverse(list);
+                return list.stream().reduce(
+                    List$.MODULE$.empty(),
+                    scala.collection.immutable.List::$colon$colon,
+                    scala.collection.immutable.List::$colon$colon$colon);
             }
-
-            @Override
-            public BiConsumer<List<T>, T> accumulator() {
-                return List::add;
-            }
-
-            @Override
-            public BinaryOperator<List<T>> combiner() {
-                return (left, right) -> {
-                    left.addAll(right);
-                    return left;
-                };
-            }
-
-            @Override
-            public Function<List<T>, scala.collection.immutable.List<T>> finisher() {
-                return (list) -> {
-                    Collections.reverse(list);
-                    return list.stream().reduce(
-                            List$.MODULE$.empty(),
-                            scala.collection.immutable.List::$colon$colon,
-                            scala.collection.immutable.List::$colon$colon$colon);
-                };
-            }
-
-            @Override
-            public Set<Characteristics> characteristics() {
-                return new HashSet<>();
-            }
-        };
+        );
     }
 }

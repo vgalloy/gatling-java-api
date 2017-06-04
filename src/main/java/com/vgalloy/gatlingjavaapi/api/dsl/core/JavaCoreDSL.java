@@ -18,7 +18,7 @@ public final class JavaCoreDSL {
 
     /**
      * Constructor.
-     * To prevent external instantiation
+     * To prevent instantiation
      */
     private JavaCoreDSL() {
         throw new AssertionError();

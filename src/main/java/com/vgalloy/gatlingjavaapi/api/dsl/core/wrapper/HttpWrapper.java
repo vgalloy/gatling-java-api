@@ -2,8 +2,8 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
 
 import java.util.Objects;
 
-import com.vgalloy.gatlingjavaapi.internal.util.Expression;
-import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 import io.gatling.http.request.builder.Http;
 
 /**
@@ -22,14 +22,14 @@ public final class HttpWrapper {
     public HttpRequestBuilderWrapper get(String requestUrl) {
         Objects.requireNonNull(requestUrl);
 
-        Expression<String> requestExpression = ScalaHelper.toExpression(requestUrl);
+        Expression<String> requestExpression = Expressions.of(requestUrl);
         return new HttpRequestBuilderWrapper(http.get(requestExpression));
     }
 
     public HttpRequestBuilderWrapper post(String requestUrl) {
         Objects.requireNonNull(requestUrl);
 
-        Expression<String> requestExpression = ScalaHelper.toExpression(requestUrl);
+        Expression<String> requestExpression = Expressions.of(requestUrl);
         return new HttpRequestBuilderWrapper(http.post(requestExpression));
     }
 }

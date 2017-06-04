@@ -1,7 +1,9 @@
 package com.vgalloy.gatlingjavaapi.server.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,16 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Vincent Galloy.
  */
 @RestController
-public class HomeController {
+class HomeController {
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @GetMapping("home")
     public String home() throws Exception {
         Thread.sleep(100);
         return "home";
     }
 
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @PostMapping("post")
     public String post() throws Exception {
+        return "post";
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @GetMapping("error")
+    public String error() throws Exception {
         return "post";
     }
 }

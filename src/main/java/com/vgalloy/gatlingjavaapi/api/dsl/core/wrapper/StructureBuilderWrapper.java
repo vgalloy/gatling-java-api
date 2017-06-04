@@ -17,12 +17,14 @@ public interface StructureBuilderWrapper<STRUCTURE extends StructureBuilder, WRA
     extends ExecsWrapper<STRUCTURE, WRAPPER>,
     PausesWrapper<STRUCTURE, WRAPPER> {
 
+    @SuppressWarnings("unchecked")
     default WRAPPER exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
         Objects.requireNonNull(httpRequestBuilderWrapper);
 
         return newInstance((STRUCTURE) get().exec(new HttpRequestActionBuilder(httpRequestBuilderWrapper.get())));
     }
 
+    @SuppressWarnings("unchecked")
     default WRAPPER exec(StructureSupportWrapper... structureSupportWrappers) {
         Objects.requireNonNull(structureSupportWrappers);
 

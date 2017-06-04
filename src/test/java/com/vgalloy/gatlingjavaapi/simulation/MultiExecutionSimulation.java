@@ -19,12 +19,10 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
  */
 public final class MultiExecutionSimulation extends SimulationWrapper {
 
-    public static int port = 8082;
-
     @Override
     protected void configure() {
         HttpProtocolBuilderWrapper httpConf = http()
-                .baseURL("http://localhost:" + port)
+                .baseURL("http://localhost:" + 9999)
                 .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                 .doNotTrackHeader("1")
                 .acceptLanguageHeader("en-US,en;q=0.5")

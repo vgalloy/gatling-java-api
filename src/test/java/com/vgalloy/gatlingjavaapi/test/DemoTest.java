@@ -32,13 +32,14 @@ public final class DemoTest {
     public void fatTest() {
         ScenarioBuilderWrapper scn = scenario("MyScenario")
             .exec(http("request_1")
-                .get("/home"))
+                .get("/home")
+                /*.check(status.is(200))*/)
             .pause(1, TimeUnit.MILLISECONDS)
             .exec(http("request2")
                 .post("/post")
                 .headers(Collections.emptyMap())
-                .formParam("name", "value"));
-//                .check(status.is(session -> 200)));
+                .formParam("name", "value")
+                /*.check(status.is(session -> 200))*/);
         HttpProtocolBuilderWrapper httpConf = http()
             .baseURL("http://localhost:" + 8080);
 

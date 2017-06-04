@@ -1,4 +1,4 @@
-package com.vgalloy.gatlingjavaapi.internal.util;
+package com.vgalloy.gatlingjavaapi.internal.util.expression;
 
 import io.gatling.commons.validation.Validation;
 import io.gatling.core.session.Session;

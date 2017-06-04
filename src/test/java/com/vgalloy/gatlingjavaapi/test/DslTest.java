@@ -4,6 +4,7 @@ import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.PopulationBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import io.gatling.commons.stats.assertion.Assertion;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -17,26 +18,35 @@ public final class DslTest {
     public void nullInjector() {
         // WHEN
         JavaSimulation.builder().scenario((PopulationBuilderWrapper[]) null);
+
+        // THEN
+        Assert.fail("Exception should occurred");
     }
 
     @Test(expected = NullPointerException.class)
     public void nullProtocol() {
         // WHEN
         JavaSimulation.builder().protocols((HttpProtocolBuilderWrapper[]) null);
+
+        // THEN
+        Assert.fail("Exception should occurred");
     }
 
     @Test(expected = NullPointerException.class)
     public void nullAssertion() {
         // WHEN
         JavaSimulation.builder().assertion((Assertion[]) null);
+
+        // THEN
+        Assert.fail("Exception should occurred");
     }
 
     @Test
     public void nullValue() {
         // WHEN
         JavaSimulation.builder()
-                .scenario()
-                .protocols()
-                .assertion();
+            .scenario()
+            .protocols()
+            .assertion();
     }
 }

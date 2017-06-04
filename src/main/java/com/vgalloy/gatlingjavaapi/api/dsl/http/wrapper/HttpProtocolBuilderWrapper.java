@@ -3,7 +3,7 @@ package com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 import io.gatling.http.protocol.HttpProtocolBuilder;
 
 /**
@@ -29,22 +29,22 @@ public final class HttpProtocolBuilderWrapper implements Supplier<HttpProtocolBu
     }
 
     public HttpProtocolBuilderWrapper acceptHeader(String acceptHeader) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptHeader(ScalaHelper.toExpression(acceptHeader)));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptHeader(Expressions.of(acceptHeader)));
     }
 
     public HttpProtocolBuilderWrapper doNotTrackHeader(String doNotTrackHeader) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.doNotTrackHeader(ScalaHelper.toExpression(doNotTrackHeader)));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.doNotTrackHeader(Expressions.of(doNotTrackHeader)));
     }
 
     public HttpProtocolBuilderWrapper acceptLanguageHeader(String acceptLanguageHeader) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptLanguageHeader(ScalaHelper.toExpression(acceptLanguageHeader)));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptLanguageHeader(Expressions.of(acceptLanguageHeader)));
     }
 
     public HttpProtocolBuilderWrapper acceptEncodingHeader(String acceptEncodingHeader) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptEncodingHeader(ScalaHelper.toExpression(acceptEncodingHeader)));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.acceptEncodingHeader(Expressions.of(acceptEncodingHeader)));
     }
 
     public HttpProtocolBuilderWrapper userAgentHeader(String userAgentHeader) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.userAgentHeader(ScalaHelper.toExpression(userAgentHeader)));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.userAgentHeader(Expressions.of(userAgentHeader)));
     }
 }

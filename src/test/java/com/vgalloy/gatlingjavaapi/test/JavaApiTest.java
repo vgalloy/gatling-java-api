@@ -38,21 +38,21 @@ public class JavaApiTest {
         JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 
         ScenarioBuilderWrapper scn = scenario("MyScenario")
-                .exec(http("request_1")
-                        .get("/home"));
+            .exec(http("request_1")
+                .get("/home"));
         HttpProtocolBuilderWrapper httpConf = http()
-                .baseURL("http://localhost:" + serverPort);
+            .baseURL("http://localhost:" + serverPort);
 
         JavaSimulation javaSimulation = JavaSimulation.builder()
-                .scenario(
-                        scn.inject(atOnceUsers(2))
-                )
-                .protocols(httpConf)
-                .assertion(
-                        global().responseTime().max().lt(2),
-                        global().successfulRequests().percent().gt(105d)
-                )
-                .build();
+            .scenario(
+                scn.inject(atOnceUsers(2))
+            )
+            .protocols(httpConf)
+            .assertion(
+                global().responseTime().max().lt(2),
+                global().successfulRequests().percent().gt(105d)
+            )
+            .build();
 
         RunResult runResult = javaGatlingRunner.run(javaSimulation);
         SimulationResult simulationResult = javaGatlingResultAnalyzer.load(runResult);

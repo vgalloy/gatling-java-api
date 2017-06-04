@@ -19,12 +19,10 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
  */
 public final class MultipleInjectionSimulation extends SimulationWrapper {
 
-    public static int port = 8082;
-
     @Override
     protected void configure() {
         HttpProtocolBuilderWrapper httpConf = http()
-                .baseURL("http://localhost:" + port);
+                .baseURL("http://localhost:" + 9999);
 
         ScenarioBuilderWrapper scn = scenario("MyScenario")
                 .exec(http("request_1")

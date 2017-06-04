@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
 
@@ -37,14 +38,14 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.header(name, ScalaHelper.toExpression(value)));
+        return new HttpRequestBuilderWrapper(httpRequestBuilder.header(name, Expressions.of(value)));
     }
 
     public HttpRequestBuilderWrapper formParam(String name, Object value) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(ScalaHelper.toExpression(name), ScalaHelper.toExpression(value)));
+        return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(Expressions.of(name), Expressions.of(value)));
     }
 
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {
