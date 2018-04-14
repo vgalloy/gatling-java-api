@@ -7,8 +7,8 @@ import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.StructureBuilder;
 import io.gatling.http.action.sync.HttpRequestActionBuilder;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 
 /**
@@ -20,7 +20,8 @@ public interface StructureBuilderWrapper<STRUCTURE extends StructureBuilder, WRA
     extends
     ExecsWrapper<STRUCTURE, WRAPPER>,
     PausesWrapper<STRUCTURE, WRAPPER>,
-    LoopWrapper<STRUCTURE, WRAPPER> {
+    LoopWrapper<STRUCTURE, WRAPPER>,
+    FeedsWrapper<STRUCTURE, WRAPPER> {
 
     @SuppressWarnings("unchecked")
     default WRAPPER exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
