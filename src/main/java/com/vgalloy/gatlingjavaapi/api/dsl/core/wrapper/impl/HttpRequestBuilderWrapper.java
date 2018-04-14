@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import io.gatling.core.body.Body;
 import io.gatling.core.body.StringBody;
+import io.gatling.core.check.CheckBuilder;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
 
@@ -57,6 +58,12 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
 
         Body stringBody = new StringBody(Expression.of(body), GatlingConfigurationSupplier.GATLING_CONFIGURATION);
         return new HttpRequestBuilderWrapper(httpRequestBuilder.body(stringBody));
+    }
+
+    public HttpRequestBuilderWrapper check(CheckBuilder<HttpCheck, ?, ?, ?> checkBuilder) {
+        Objects.requireNonNull(checkBuilder);
+
+        return check(checkBuilder.build());
     }
 
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {

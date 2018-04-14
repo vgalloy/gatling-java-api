@@ -1,12 +1,13 @@
 package com.vgalloy.gatlingjavaapi.test;
 
+import org.junit.Test;
+
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
 import com.vgalloy.gatlingjavaapi.simulation.AssertionSimulation;
 import com.vgalloy.gatlingjavaapi.simulation.MultiExecutionSimulation;
 import com.vgalloy.gatlingjavaapi.simulation.MultiScenariosSimulation;
 import com.vgalloy.gatlingjavaapi.simulation.MultipleInjectionSimulation;
 import com.vgalloy.gatlingjavaapi.simulation.SimpleSimulation;
-import org.junit.Test;
 
 /**
  * Created by Vincent Galloy on 23/02/2017.
@@ -36,7 +37,7 @@ public final class SimulationDslTest {
     }
 
     @Test
-    public void MultipleInjection() {
+    public void multipleInjection() {
         JavaGatlingRunner.getInstance().run(MultipleInjectionSimulation.class);
     }
 }

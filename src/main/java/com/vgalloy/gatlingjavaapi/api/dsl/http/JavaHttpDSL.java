@@ -1,10 +1,12 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http;
 
+import io.gatling.core.check.DefaultFindCheckBuilder;
 import io.gatling.http.Predef;
 import io.gatling.http.request.builder.Http;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.DefaultFindCheckBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
@@ -30,5 +32,9 @@ public final class JavaHttpDSL {
 
     public static HttpProtocolBuilderWrapper http() {
         return new HttpProtocolBuilderWrapper(Predef.http(GatlingConfigurationSupplier.GATLING_CONFIGURATION));
+    }
+
+    public static DefaultFindCheckBuilderWrapper status() {
+        return new DefaultFindCheckBuilderWrapper((DefaultFindCheckBuilder) Predef.status());
     }
 }

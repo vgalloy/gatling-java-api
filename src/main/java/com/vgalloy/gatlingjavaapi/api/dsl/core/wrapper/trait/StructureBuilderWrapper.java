@@ -21,7 +21,8 @@ public interface StructureBuilderWrapper<STRUCTURE extends StructureBuilder, WRA
     ExecsWrapper<STRUCTURE, WRAPPER>,
     PausesWrapper<STRUCTURE, WRAPPER>,
     LoopWrapper<STRUCTURE, WRAPPER>,
-    FeedsWrapper<STRUCTURE, WRAPPER> {
+    FeedsWrapper<STRUCTURE, WRAPPER>,
+    ErrorWrapper<STRUCTURE, WRAPPER> {
 
     @SuppressWarnings("unchecked")
     default WRAPPER exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
