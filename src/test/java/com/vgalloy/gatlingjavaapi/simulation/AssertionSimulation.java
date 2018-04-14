@@ -4,7 +4,7 @@ import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapp
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.SimulationWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaAssertionSupport.global;
+import static com.vgalloy.gatlingjavaapi.api.dsl.assertion.JavaAssertionSupport.global;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
 import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;

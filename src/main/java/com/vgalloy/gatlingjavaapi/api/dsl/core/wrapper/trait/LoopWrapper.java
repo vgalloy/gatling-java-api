@@ -17,9 +17,7 @@ public interface LoopWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends
 
     @SuppressWarnings("unchecked")
     default WRAPPER repeat(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
-        Objects.requireNonNull(execsWrapper);
-
-        return newInstance((STRUCTURE) get().repeat(Expression.of(times), UUID.randomUUID().toString(), execsWrapper.get()));
+        return repeat(times, UUID.randomUUID().toString(), execsWrapper);
     }
 
     @SuppressWarnings("unchecked")

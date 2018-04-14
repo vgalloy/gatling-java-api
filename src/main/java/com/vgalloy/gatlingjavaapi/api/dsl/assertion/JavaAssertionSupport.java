@@ -1,8 +1,9 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core;
+package com.vgalloy.gatlingjavaapi.api.dsl.assertion;
 
-import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import io.gatling.core.Predef;
 import io.gatling.core.assertion.AssertionWithPath;
+
+import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 
 /**
  * Created by Vincent Galloy on 27/02/2017.

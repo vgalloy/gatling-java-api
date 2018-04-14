@@ -16,7 +16,7 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import com.vgalloy.gatlingjavaapi.server.TestServerConfig;
 
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaAssertionSupport.global;
+import static com.vgalloy.gatlingjavaapi.api.dsl.assertion.JavaAssertionSupport.global;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
