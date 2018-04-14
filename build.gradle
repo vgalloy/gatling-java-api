@@ -15,8 +15,29 @@ ext {
     springBootversion = '1.5.3.RELEASE'
 }
 
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
 sourceCompatibility = "$javaVersion"
 targetCompatibility = "$javaVersion"
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
 
 publishing {
     publications {
@@ -36,3 +57,6 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-web:$springBootversion"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootversion"
 }
+
+integrationTest.mustRunAfter test
+check.dependsOn integrationTest

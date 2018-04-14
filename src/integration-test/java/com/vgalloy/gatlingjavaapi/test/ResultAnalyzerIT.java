@@ -1,5 +1,13 @@
 package com.vgalloy.gatlingjavaapi.test;
 
+import io.gatling.app.RunResult;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingResultAnalyzer;
@@ -8,13 +16,6 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import com.vgalloy.gatlingjavaapi.server.TestServerConfig;
 import com.vgalloy.gatlingjavaapi.simulation.AssertionSimulation;
-import io.gatling.app.RunResult;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaAssertionSupport.global;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
@@ -28,7 +29,7 @@ import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestServerConfig.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ResultAnalyzerTest {
+public class ResultAnalyzerIT {
 
     @LocalServerPort
     private int serverPort;
