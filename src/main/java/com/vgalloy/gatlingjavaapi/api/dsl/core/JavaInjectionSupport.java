@@ -21,6 +21,11 @@ public final class JavaInjectionSupport {
         throw new AssertionError();
     }
 
+    public static InjectionStep nothingFor(long length, TimeUnit unit) {
+        FiniteDuration finiteDuration = FiniteDuration.apply(length, unit);
+        return Predef.nothingFor(finiteDuration);
+    }
+
     public static InjectionStep atOnceUsers(int i) {
         return Predef.atOnceUsers(i);
     }
@@ -28,11 +33,6 @@ public final class JavaInjectionSupport {
     public static InjectionStep rampUsers(int users, long length, TimeUnit unit) {
         FiniteDuration finiteDuration = FiniteDuration.apply(length, unit);
         return Predef.rampUsers(users).over(finiteDuration);
-    }
-
-    public static InjectionStep nothingFor(long length, TimeUnit unit) {
-        FiniteDuration finiteDuration = FiniteDuration.apply(length, unit);
-        return Predef.nothingFor(finiteDuration);
     }
 
     public static InjectionStep constantUsersPerSec(double users, long length, TimeUnit unit) {

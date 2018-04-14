@@ -1,6 +1,6 @@
 package com.vgalloy.gatlingjavaapi.simulation;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.SimulationWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 
@@ -36,7 +36,6 @@ public final class MultiScenariosSimulation extends SimulationWrapper {
         setUp(
             scn.inject(atOnceUsers(10)),
             scn2.inject(atOnceUsers(10))
-        )
-            .protocols(httpConf);
+        ).protocols(httpConf);
     }
 }

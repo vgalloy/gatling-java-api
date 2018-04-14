@@ -3,6 +3,7 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.PopulationBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import io.gatling.commons.stats.assertion.Assertion;

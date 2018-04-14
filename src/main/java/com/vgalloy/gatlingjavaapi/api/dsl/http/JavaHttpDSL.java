@@ -1,12 +1,13 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.HttpWrapper;
+import io.gatling.http.Predef;
+import io.gatling.http.request.builder.Http;
+
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
-import io.gatling.http.Predef;
-import io.gatling.http.request.builder.Http;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.

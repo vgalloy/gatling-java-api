@@ -1,4 +1,4 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
+package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.trait;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;

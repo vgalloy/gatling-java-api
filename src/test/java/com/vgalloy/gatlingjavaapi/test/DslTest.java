@@ -1,6 +1,6 @@
 package com.vgalloy.gatlingjavaapi.test;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.PopulationBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.PopulationBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import io.gatling.commons.stats.assertion.Assertion;

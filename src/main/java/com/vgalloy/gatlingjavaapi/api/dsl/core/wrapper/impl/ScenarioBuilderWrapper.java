@@ -1,10 +1,12 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
+package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl;
 
 import java.util.Objects;
 
-import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import io.gatling.core.controller.inject.InjectionStep;
 import io.gatling.core.structure.ScenarioBuilder;
+
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.trait.StructureBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.

@@ -8,7 +8,7 @@ import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingResultAnalyzer;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
@@ -17,6 +17,7 @@ import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import com.vgalloy.gatlingjavaapi.server.TestServerConfig;
 
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaAssertionSupport.global;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
 import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
@@ -40,7 +41,11 @@ public class JavaApiIT {
 
         ScenarioBuilderWrapper scn = scenario("MyScenario")
             .exec(http("request_1")
-                .get("/home"));
+                .get("/home"))
+            .repeat(2,
+                exec(http("request_get")
+                .get("/get/1")
+            ));
         HttpProtocolBuilderWrapper httpConf = http()
             .baseURL("http://localhost:" + serverPort);
 
@@ -50,8 +55,8 @@ public class JavaApiIT {
             )
             .protocols(httpConf)
             .assertion(
-                global().responseTime().max().lt(2),
-                global().successfulRequests().percent().gt(105d)
+                global().responseTime().mean().lt(1_000),
+                global().successfulRequests().percent().gt(99.9d)
             )
             .build();
 
@@ -60,6 +65,6 @@ public class JavaApiIT {
 
         // THEN
         javaGatlingResultAnalyzer.generateHtml(runResult);
-        Assert.assertFalse(simulationResult.isSuccess());
+        Assert.assertTrue(simulationResult.isSuccess());
     }
 }

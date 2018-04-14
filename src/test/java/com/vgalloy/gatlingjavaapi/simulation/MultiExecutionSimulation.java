@@ -2,9 +2,9 @@ package com.vgalloy.gatlingjavaapi.simulation;
 
 import java.util.concurrent.TimeUnit;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.SimulationWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.StructureSupportWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
@@ -29,11 +29,11 @@ public final class MultiExecutionSimulation extends SimulationWrapper {
             .acceptEncodingHeader("gzip, deflate")
             .userAgentHeader("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0");
 
-        StructureSupportWrapper chain1 = exec(http("Home").get("/home"))
+        ChainBuilderWrapper chain1 = exec(http("Home").get("/home"))
             .pause(500, TimeUnit.MILLISECONDS)
             .exec(http("Home").get("/home"));
 
-        StructureSupportWrapper chain2 = exec(http("Home").get("/home"))
+        ChainBuilderWrapper chain2 = exec(http("Home").get("/home"))
             .pause(1, TimeUnit.SECONDS)
             .exec(http("Home").get("/home"));
 

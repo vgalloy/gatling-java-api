@@ -3,7 +3,7 @@ package com.vgalloy.gatlingjavaapi.test;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingResultAnalyzer;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;

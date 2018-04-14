@@ -1,16 +1,17 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
+package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl;
 
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
-import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 import io.gatling.core.body.Body;
 import io.gatling.core.body.StringBody;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
+
+import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
+import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.

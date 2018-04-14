@@ -8,7 +8,7 @@ import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingResultAnalyzer;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
@@ -46,7 +46,6 @@ public class ResultAnalyzerIT {
 
     @Test
     public void generation() {
-
         JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
         JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 

@@ -1,4 +1,4 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper;
+package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl;
 
 import java.util.Objects;
 import java.util.function.Supplier;

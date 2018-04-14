@@ -27,4 +27,12 @@ public final class SimpleModel implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "SimpleModel{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
+    }
 }

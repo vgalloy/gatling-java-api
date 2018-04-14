@@ -12,7 +12,7 @@ version = '1.0-SNAPSHOT'
 ext {
     javaVersion = '1.8'
     gatlingVersion = '2.3.1'
-    springBootversion = '1.5.3.RELEASE'
+    springBootversion = '1.5.10.RELEASE'
 }
 
 configurations {

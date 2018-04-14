@@ -1,13 +1,14 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.core;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.HttpRequestBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.ScenarioBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.StructureSupportWrapper;
 import io.gatling.core.Predef;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.ScenarioBuilder;
 import io.gatling.http.action.sync.HttpRequestActionBuilder;
 import scala.collection.immutable.List$;
+
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -28,7 +29,7 @@ public final class JavaCoreDSL {
         return new ScenarioBuilderWrapper(new ScenarioBuilder(scenarioName, List$.MODULE$.empty()));
     }
 
-    public static StructureSupportWrapper exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
-        return new StructureSupportWrapper((ChainBuilder) Predef.exec(new HttpRequestActionBuilder(httpRequestBuilderWrapper.get())));
+    public static ChainBuilderWrapper exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
+        return new ChainBuilderWrapper((ChainBuilder) Predef.exec(new HttpRequestActionBuilder(httpRequestBuilderWrapper.get())));
     }
 }
