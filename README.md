@@ -14,7 +14,7 @@ public final class Main {
     public static void main(String[] args) {
         JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
         JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
-        
+
         ScenarioBuilderWrapper scn = scenario("MyScenario")
             .exec(http("request_1")
                 .get("/home"))

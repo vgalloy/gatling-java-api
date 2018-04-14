@@ -6,7 +6,7 @@ import java.util.UUID;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.StructureBuilder;
 
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
  * Created by Vincent Galloy on 28/02/2017.
@@ -19,7 +19,7 @@ public interface LoopWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends
     default WRAPPER repeat(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
         Objects.requireNonNull(execsWrapper);
 
-        return newInstance((STRUCTURE) get().repeat(Expressions.of(times), UUID.randomUUID().toString(), execsWrapper.get()));
+        return newInstance((STRUCTURE) get().repeat(Expression.of(times), UUID.randomUUID().toString(), execsWrapper.get()));
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +27,6 @@ public interface LoopWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends
         Objects.requireNonNull(counterName);
         Objects.requireNonNull(execsWrapper);
 
-        return newInstance((STRUCTURE) get().repeat(Expressions.of(times), counterName, execsWrapper.get()));
+        return newInstance((STRUCTURE) get().repeat(Expression.of(times), counterName, execsWrapper.get()));
     }
 }

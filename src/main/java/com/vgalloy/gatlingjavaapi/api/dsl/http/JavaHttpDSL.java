@@ -7,7 +7,6 @@ import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -25,7 +24,7 @@ public final class JavaHttpDSL {
     }
 
     public static HttpWrapper http(String requestName) {
-        Expression<String> requestExpression = Expressions.of(requestName);
+        Expression<String> requestExpression = Expression.of(requestName);
         return new HttpWrapper(new Http(requestExpression));
     }
 

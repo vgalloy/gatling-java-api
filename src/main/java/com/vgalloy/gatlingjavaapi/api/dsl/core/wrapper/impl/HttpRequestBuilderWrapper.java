@@ -11,7 +11,7 @@ import io.gatling.http.request.builder.HttpRequestBuilder;
 
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -42,20 +42,20 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.header(name, Expressions.of(value)));
+        return new HttpRequestBuilderWrapper(httpRequestBuilder.header(name, Expression.of(value)));
     }
 
     public HttpRequestBuilderWrapper formParam(String name, Object value) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(Expressions.of(name), Expressions.of(value)));
+        return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(Expression.of(name), Expression.of(value)));
     }
 
     public HttpRequestBuilderWrapper body(String body) {
         Objects.requireNonNull(body);
 
-        Body stringBody = new StringBody(Expressions.of(body), GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+        Body stringBody = new StringBody(Expression.of(body), GatlingConfigurationSupplier.GATLING_CONFIGURATION);
         return new HttpRequestBuilderWrapper(httpRequestBuilder.body(stringBody));
     }
 

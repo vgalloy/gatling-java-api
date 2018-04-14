@@ -3,13 +3,13 @@ package com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper;
 import java.util.Objects;
 import java.util.function.Function;
 
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expressions;
 import io.gatling.core.check.CheckBuilder;
 import io.gatling.core.check.ValidatorCheckBuilder;
 import io.gatling.core.session.Session;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.check.status.HttpStatusCheckBuilder;
+
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
  * Created by Vincent Galloy on 04/06/17.
@@ -21,13 +21,13 @@ public final class ValidatorCheckBuilderWrapper {
     public HttpCheck is(Integer value) {
         Objects.requireNonNull(value);
 
-        return is(Expressions.of(value));
+        return is(Expression.of(value));
     }
 
     public HttpCheck is(Function<Session, Integer> expression) {
         Objects.requireNonNull(expression);
 
-        return is(Expressions.fromFunction(expression));
+        return is(Expression.fromFunction(expression));
     }
 
     private HttpCheck is(Expression<Integer> expression) {

@@ -15,7 +15,7 @@ public class InternalSimulationWrapper extends SimulationWrapper {
     @Override
     protected void configure() {
         setUp(javaSimulation.getPopulationBuilderWrappers())
-                .protocols(javaSimulation.getHttpProtocolBuilderWrapper())
-                .assertion(javaSimulation.getAssertions());
+            .protocols(javaSimulation.getHttpProtocolBuilderWrapper())
+            .assertion(javaSimulation.getAssertions());
     }
 }
