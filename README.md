@@ -9,25 +9,44 @@ Or
 ```
 ## Use
 ```java
-public final class SimpleSimulation extends SimulationWrapper {
+public final class Main {
 
-    @Override
-    protected void configure() {
-        HttpProtocolBuilderWrapper httpConf = http()
-            .baseURL("http://localhost:" + 9999)
-            .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-            .doNotTrackHeader("1")
-            .acceptLanguageHeader("en-US,en;q=0.5")
-            .acceptEncodingHeader("gzip, deflate")
-            .userAgentHeader("Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0");
-
+    public static void main(String[] args) {
+        JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
+        JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
+        
         ScenarioBuilderWrapper scn = scenario("MyScenario")
             .exec(http("request_1")
-                .get("/home"));
+                .get("/home"))
+            .repeat(2,
+                exec(http("request_get")
+                    .get("/get/1")
+                ));
+        HttpProtocolBuilderWrapper httpConf = http()
+            .baseURL("http://localhost:" + 8080);
 
-        setUp(
-            scn.inject(atOnceUsers(1))
-        ).protocols(httpConf);
+        JavaSimulation javaSimulation = JavaSimulation.builder()
+            .scenario(
+                scn.inject(atOnceUsers(2))
+            )
+            .protocols(httpConf)
+            .assertion(
+                global().responseTime().mean().lt(1_000),
+                global().successfulRequests().percent().gt(99.9d)
+            )
+            .build();
+
+        // Run the simulation
+        RunResult runResult = javaGatlingRunner.run(javaSimulation);
+
+        // Assert everything is ok
+        SimulationResult simulationResult = javaGatlingResultAnalyzer.load(runResult);
+        if (!simulationResult.isSuccess()) {
+            throw new IllegalStateException("Run fails");
+        }
+
+        // Generate HTML report
+        javaGatlingResultAnalyzer.generateHtml(runResult);
     }
 }
 ```
