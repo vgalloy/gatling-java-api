@@ -3,13 +3,14 @@ package com.vgalloy.gatlingjavaapi.internal.impl;
 import java.util.Objects;
 
 import akka.actor.ActorSystem;
-import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
-import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import io.gatling.app.RunResult;
 import io.gatling.app.Runner;
 import io.gatling.core.config.GatlingConfiguration;
 import io.gatling.core.scenario.Simulation;
 import scala.collection.mutable.Map$;
+
+import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
+import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 
 /**
  * Created by Vincent Galloy on 23/02/2017.
@@ -40,7 +41,7 @@ public enum JavaGatlingRunnerImpl implements JavaGatlingRunner {
         try {
             return runner.run(clazz);
         } finally {
-            actorSystem.shutdown();
+            actorSystem.terminate();
         }
     }
 }

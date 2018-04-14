@@ -13,7 +13,6 @@ import scala.runtime.AbstractFunction1;
  *
  * @author Vincent Galloy.
  */
-
 final class FunctionExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>> implements Expression<TYPE> {
 
     private final Function<Session, TYPE> function;

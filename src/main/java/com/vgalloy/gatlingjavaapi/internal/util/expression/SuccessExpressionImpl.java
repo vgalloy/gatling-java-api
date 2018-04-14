@@ -10,7 +10,6 @@ import scala.runtime.AbstractFunction1;
  *
  * @author Vincent Galloy.
  */
-
 final class SuccessExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>> implements Expression<TYPE> {
 
     private final Success<TYPE> object;
