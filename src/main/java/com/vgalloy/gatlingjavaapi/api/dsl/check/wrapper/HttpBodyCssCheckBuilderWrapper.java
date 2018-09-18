@@ -52,7 +52,7 @@ public class HttpBodyCssCheckBuilderWrapper implements Supplier<HttpBodyCssCheck
         Objects.requireNonNull(name);
 
         final ValidatorCheckBuilder validatorCheckBuilder = httpBodyCssCheckBuilder.find();
-        CheckBuilder<HttpCheck, Response, NodeSelector, String> checkBuilder = validatorCheckBuilder.validate(Expression.of(name));
+        final CheckBuilder<HttpCheck, Response, NodeSelector, String> checkBuilder = validatorCheckBuilder.validate(Expression.of(name));
         return checkBuilder.copy(checkBuilder.validatorCheckBuilder(), checkBuilder.validator(), new Some(name));
     }
 }

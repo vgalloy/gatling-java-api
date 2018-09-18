@@ -1,5 +1,6 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.core;
 
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
 import io.gatling.core.Predef;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.ScenarioBuilder;
@@ -7,7 +8,7 @@ import io.gatling.http.action.sync.HttpRequestActionBuilder;
 import scala.collection.immutable.List$;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpRequestBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 
 /**
@@ -29,7 +30,7 @@ public final class JavaCoreDSL {
         return new ScenarioBuilderWrapper(new ScenarioBuilder(scenarioName, List$.MODULE$.empty()));
     }
 
-    public static ChainBuilderWrapper exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
-        return new ChainBuilderWrapper((ChainBuilder) Predef.exec(new HttpRequestActionBuilder(httpRequestBuilderWrapper.get())));
+    public static ChainBuilderWrapper exec(ActionBuilderSupplier actionBuilderSupplier) {
+        return new ChainBuilderWrapper((ChainBuilder) Predef.exec(actionBuilderSupplier.toActionBuilder()));
     }
 }

@@ -3,12 +3,11 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.trait;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.StructureBuilder;
-import io.gatling.http.action.sync.HttpRequestActionBuilder;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 
 /**
@@ -25,10 +24,10 @@ public interface StructureBuilderWrapper<STRUCTURE extends StructureBuilder, WRA
     ErrorWrapper<STRUCTURE, WRAPPER> {
 
     @SuppressWarnings("unchecked")
-    default WRAPPER exec(HttpRequestBuilderWrapper httpRequestBuilderWrapper) {
-        Objects.requireNonNull(httpRequestBuilderWrapper);
+    default WRAPPER exec(ActionBuilderSupplier actionBuilderSupplier) {
+        Objects.requireNonNull(actionBuilderSupplier);
 
-        return newInstance((STRUCTURE) get().exec(new HttpRequestActionBuilder(httpRequestBuilderWrapper.get())));
+        return newInstance((STRUCTURE) get().exec(actionBuilderSupplier.toActionBuilder()));
     }
 
     @SuppressWarnings("unchecked")

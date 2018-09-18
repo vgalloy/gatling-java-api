@@ -1,25 +1,25 @@
-package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl;
+package com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Supplier;
-
-import io.gatling.core.body.Body;
-import io.gatling.core.body.StringBody;
-import io.gatling.core.check.CheckBuilder;
-import io.gatling.http.check.HttpCheck;
-import io.gatling.http.request.builder.HttpRequestBuilder;
-
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
+import io.gatling.core.action.builder.ActionBuilder;
+import io.gatling.core.body.Body;
+import io.gatling.core.body.StringBody;
+import io.gatling.core.check.CheckBuilder;
+import io.gatling.http.action.sync.HttpRequestActionBuilder;
+import io.gatling.http.check.HttpCheck;
+import io.gatling.http.request.builder.HttpRequestBuilder;
+
+import java.util.Objects;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
  *
  * @author Vincent Galloy.
  */
-public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuilder> {
+public final class HttpRequestBuilderWrapper extends RequestBuilderWrapper<HttpRequestBuilder, HttpRequestBuilderWrapper> implements ActionBuilderSupplier {
 
     private final HttpRequestBuilder httpRequestBuilder;
 
@@ -32,32 +32,23 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
         return httpRequestBuilder;
     }
 
-    public HttpRequestBuilderWrapper headers(Map<String, String> headers) {
-        Objects.requireNonNull(headers);
-
-        scala.collection.immutable.Map<String, String> map = ScalaHelper.map(headers);
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.headers(map));
-    }
-
-    public HttpRequestBuilderWrapper header(String name, String value) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(value);
-
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.header(name, Expression.of(value)));
+    @Override
+    protected HttpRequestBuilderWrapper newInstance(HttpRequestBuilder newStructure) {
+        return new HttpRequestBuilderWrapper(newStructure);
     }
 
     public HttpRequestBuilderWrapper formParam(String name, Object value) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.formParam(Expression.of(name), Expression.of(value)));
+        return newInstance(httpRequestBuilder.formParam(Expression.of(name), Expression.of(value)));
     }
 
     public HttpRequestBuilderWrapper body(String body) {
         Objects.requireNonNull(body);
 
         Body stringBody = new StringBody(Expression.of(body), GatlingConfigurationSupplier.GATLING_CONFIGURATION);
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.body(stringBody));
+        return newInstance(httpRequestBuilder.body(stringBody));
     }
 
     public HttpRequestBuilderWrapper check(CheckBuilder<HttpCheck, ?, ?, ?> checkBuilder) {
@@ -69,6 +60,11 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {
         Objects.requireNonNull(httpCheck);
 
-        return new HttpRequestBuilderWrapper(httpRequestBuilder.check(ScalaHelper.map(httpCheck)));
+        return newInstance(httpRequestBuilder.check(ScalaHelper.map(httpCheck)));
+    }
+
+    @Override
+    public ActionBuilder toActionBuilder() {
+        return new HttpRequestActionBuilder(httpRequestBuilder);
     }
 }
