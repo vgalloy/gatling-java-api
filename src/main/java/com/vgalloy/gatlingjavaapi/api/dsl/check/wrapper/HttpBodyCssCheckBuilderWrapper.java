@@ -33,14 +33,17 @@ public class HttpBodyCssCheckBuilderWrapper implements Supplier<HttpBodyCssCheck
         return httpBodyCssCheckBuilder;
     }
 
+    @SuppressWarnings("unchecked")
     public Expression<Extractor<NodeSelector, String>> findExtractor(int occurrence) {
         return (Expression<Extractor<NodeSelector, String>>) httpBodyCssCheckBuilder.findExtractor(occurrence);
     }
 
+	@SuppressWarnings("unchecked")
     public Expression<Extractor<NodeSelector, Seq<String>>> findAllExtractor() {
         return (Expression<Extractor<NodeSelector, Seq<String>>>) httpBodyCssCheckBuilder.findAllExtractor();
     }
 
+	@SuppressWarnings("unchecked")
     public Expression<Extractor<NodeSelector, Object>> countExtractor() {
         return (Expression<Extractor<NodeSelector, Object>>) httpBodyCssCheckBuilder.countExtractor();
     }
@@ -48,7 +51,7 @@ public class HttpBodyCssCheckBuilderWrapper implements Supplier<HttpBodyCssCheck
     public CheckBuilder<HttpCheck, Response, NodeSelector, String> saveAs(String name) {
         Objects.requireNonNull(name);
 
-        ValidatorCheckBuilder validatorCheckBuilder = httpBodyCssCheckBuilder.find();
+        final ValidatorCheckBuilder validatorCheckBuilder = httpBodyCssCheckBuilder.find();
         CheckBuilder<HttpCheck, Response, NodeSelector, String> checkBuilder = validatorCheckBuilder.validate(Expression.of(name));
         return checkBuilder.copy(checkBuilder.validatorCheckBuilder(), checkBuilder.validator(), new Some(name));
     }

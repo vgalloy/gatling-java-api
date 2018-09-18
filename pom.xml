@@ -14,8 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Maven -->
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <maven-failsafe-plugin.version>2.22.0</maven-failsafe-plugin.version>
 
         <!-- Other plugin -->
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
@@ -24,7 +24,7 @@
         <gatling.version>2.3.1</gatling.version>
 
         <!-- Test -->
-        <spring-boot.version>1.5.10.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.16.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
