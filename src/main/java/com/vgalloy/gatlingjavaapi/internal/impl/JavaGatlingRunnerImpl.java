@@ -7,6 +7,8 @@ import io.gatling.app.RunResult;
 import io.gatling.app.Runner;
 import io.gatling.core.config.GatlingConfiguration;
 import io.gatling.core.scenario.Simulation;
+import scala.Option;
+import scala.Some;
 import scala.collection.mutable.Map$;
 
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
@@ -29,15 +31,13 @@ public enum JavaGatlingRunnerImpl implements JavaGatlingRunner {
 
     @Override
     public synchronized RunResult run(Class<? extends Simulation> simulationClass) {
-        GatlingConfiguration conf = GatlingConfiguration.load(Map$.MODULE$.empty());
-
-        String actorSystemName = "GatlingSystem" /* + uuid.toString()*/;
-
-        ActorSystem actorSystem = ActorSystem.create(actorSystemName, GatlingConfiguration.loadActorSystemConfiguration());
-        io.gatling.app.Runner runner = new Runner(actorSystem, conf);
+        final GatlingConfiguration conf = GatlingConfiguration.load(Map$.MODULE$.empty());
+        final String actorSystemName = "GatlingSystem" /* + uuid.toString()*/;
+        final ActorSystem actorSystem = ActorSystem.create(actorSystemName, GatlingConfiguration.loadActorSystemConfiguration());
+        final Runner runner = new Runner(actorSystem, conf);
 
         @SuppressWarnings("unchecked")
-        scala.Option<Class<Simulation>> clazz = new scala.Some<>((Class<Simulation>) simulationClass);
+        final Option<Class<Simulation>> clazz = new Some<>((Class<Simulation>) simulationClass);
         try {
             return runner.run(clazz);
         } finally {

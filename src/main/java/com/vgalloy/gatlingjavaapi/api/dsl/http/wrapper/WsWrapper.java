@@ -1,6 +1,6 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper;
 
-import com.redis.R;
+import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.AsyncPlainCheckBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 import io.gatling.core.check.CheckBuilder;
 import io.gatling.http.check.async.AsyncCheck;
@@ -27,6 +27,10 @@ public final class WsWrapper implements Supplier<Ws> {
         return ws;
     }
 
+    public WsWrapper wsName(String wsName) {
+        return new WsWrapper(ws.wsName(wsName));
+    }
+
     public WsOpenRequestBuilderSupplier open(String url) {
         return new WsOpenRequestBuilderSupplier(ws.open(Expression.of(url)));
     }
@@ -41,6 +45,10 @@ public final class WsWrapper implements Supplier<Ws> {
 
     public WsSetCheckBuilderWrapper check(CheckBuilder<AsyncCheck, String, ?, ?> javaAsyncCheckBuilder) {
         return new WsSetCheckBuilderWrapper(ws.check(javaAsyncCheckBuilder));
+    }
+
+    public WsSetCheckBuilderWrapper check(AsyncPlainCheckBuilderWrapper asyncPlainCheckBuilderWrapper) {
+        return check(asyncPlainCheckBuilderWrapper.toCheckBuilder());
     }
 
     public WsCancelCheckBuilderWrapper cancelCheck() {
