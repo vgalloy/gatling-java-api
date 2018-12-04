@@ -1,7 +1,7 @@
 package com.vgalloy.gatlingjavaapi.server;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
