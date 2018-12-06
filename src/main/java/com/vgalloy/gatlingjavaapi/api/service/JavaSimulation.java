@@ -26,9 +26,9 @@ public final class JavaSimulation {
         Objects.requireNonNull(httpProtocolBuilderWrappers);
         Objects.requireNonNull(assertions);
 
-        this.populationBuilderWrappers = populationBuilderWrappers.toArray(new PopulationBuilderWrapper[populationBuilderWrappers.size()]);
-        this.httpProtocolBuilderWrappers = httpProtocolBuilderWrappers.toArray(new HttpProtocolBuilderWrapper[httpProtocolBuilderWrappers.size()]);
-        this.assertions = assertions.toArray(new Assertion[assertions.size()]);
+        this.populationBuilderWrappers = populationBuilderWrappers.toArray(new PopulationBuilderWrapper[0]);
+        this.httpProtocolBuilderWrappers = httpProtocolBuilderWrappers.toArray(new HttpProtocolBuilderWrapper[0]);
+        this.assertions = assertions.toArray(new Assertion[0]);
     }
 
     public static Builder builder() {

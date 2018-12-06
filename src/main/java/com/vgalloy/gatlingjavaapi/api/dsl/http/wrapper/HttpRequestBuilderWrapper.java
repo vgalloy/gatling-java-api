@@ -1,18 +1,22 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
-import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
-import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
+import java.util.Objects;
+
 import io.gatling.core.action.builder.ActionBuilder;
 import io.gatling.core.body.Body;
 import io.gatling.core.body.StringBody;
 import io.gatling.core.check.CheckBuilder;
-import io.gatling.http.action.sync.HttpRequestActionBuilder;
+import io.gatling.core.check.CheckMaterializer;
+import io.gatling.http.Predef;
+import io.gatling.http.action.HttpRequestActionBuilder;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
 
-import java.util.Objects;
+import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.CheckBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
+import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
+import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -51,10 +55,13 @@ public final class HttpRequestBuilderWrapper extends RequestBuilderWrapper<HttpR
         return newInstance(httpRequestBuilder.body(stringBody));
     }
 
-    public HttpRequestBuilderWrapper check(CheckBuilder<HttpCheck, ?, ?, ?> checkBuilder) {
-        Objects.requireNonNull(checkBuilder);
+    public HttpRequestBuilderWrapper check(CheckBuilderWrapper checkBuilderWrapper) {
+        Objects.requireNonNull(checkBuilderWrapper);
 
-        return check(checkBuilder.build());
+        CheckBuilder<?, ?, ?> checkBuilder = checkBuilderWrapper.get();
+        CheckMaterializer/*<CssCheckType, HttpCheck , Response, NodeSelector>*/ materializer = checkBuilderWrapper.getCheckMaterializer();
+        HttpCheck httpCheck = Predef.checkBuilder2HttpCheck(checkBuilder, materializer);
+        return check(httpCheck);
     }
 
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {

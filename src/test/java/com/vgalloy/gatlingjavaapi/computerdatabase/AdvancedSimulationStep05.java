@@ -8,17 +8,17 @@ import java.util.concurrent.TimeUnit;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.SimulationWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.RecordSeqFeederBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.SourceFeederBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 
 import static com.vgalloy.gatlingjavaapi.api.dsl.check.JavaCheckSupport.css;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.exec;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.scenario;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.rampUsers;
 import static com.vgalloy.gatlingjavaapi.api.dsl.error.JavaErrorSupport.tryMax;
 import static com.vgalloy.gatlingjavaapi.api.dsl.feeder.JavaFeederSupport.csv;
-import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
-import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.status;
+import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDsl.http;
+import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDsl.status;
 import static com.vgalloy.gatlingjavaapi.api.dsl.loop.JavaLoopSupport.repeat;
 
 /**
@@ -30,7 +30,7 @@ public final class AdvancedSimulationStep05 extends SimulationWrapper {
 
     private static class Search {
 
-        private static RecordSeqFeederBuilderWrapper feeder = csv("search.csv").random();
+        private static SourceFeederBuilderWrapper feeder = csv("search.csv").random();
 
         private static ChainBuilderWrapper search = exec(http("Home")
             .get("/"))
@@ -71,8 +71,8 @@ public final class AdvancedSimulationStep05 extends SimulationWrapper {
                     .formParam("name", "Beautiful Computer")
                     .formParam("introduced", "2012-05-30")
                     .formParam("discontinued", "")
-                    .formParam("company", "37").
-                        check(status().is(session -> 200 + ThreadLocalRandom.current().nextInt(2))))
+                    .formParam("company", "37")
+                    .check(status().is(session -> 200 + ThreadLocalRandom.current().nextInt(2))))
         ).exitHereIfFailed();
     }
 

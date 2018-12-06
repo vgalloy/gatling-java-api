@@ -1,7 +1,7 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
-import io.gatling.core.check.Check;
 import io.gatling.core.check.CheckBuilder;
+import io.gatling.core.check.CheckMaterializer;
 import scala.Some;
 
 /**
@@ -9,12 +9,21 @@ import scala.Some;
  *
  * @author Vincent Galloy
  */
-public interface SaveAsWrapper<C extends Check<R>, R, P, X> {
+public interface SaveAsWrapper<T, P, X> {
 
-    CheckBuilder<C, R, P, X> toCheckBuilder();
+    CheckBuilder<T, P, X> toCheckBuilder();
 
-    default CheckBuilder<C, R, P, X> saveAs(String key) {
-        final CheckBuilder<C, R, P, X> checkBuilder = toCheckBuilder();
-        return checkBuilder.copy(checkBuilder.validatorCheckBuilder(), checkBuilder.validator(), new Some<>(key));
+    CheckMaterializer checkMaterializer();
+
+    default CheckBuilderWrapper<T, P, X> saveAs(String key) {
+        final CheckBuilder<T, P, X> checkBuilder = toCheckBuilder();
+        final CheckBuilder<T, P, X> newInstance = checkBuilder.copy(checkBuilder.extractor(), checkBuilder.validator(), checkBuilder.displayActualValue(), checkBuilder.customName(), new Some(key));
+        return new CheckBuilderWrapper<T, P, X>(newInstance) {
+
+            @Override
+            public CheckMaterializer getCheckMaterializer() {
+                return checkMaterializer();
+            }
+        };
     }
 }

@@ -2,11 +2,12 @@ package com.vgalloy.gatlingjavaapi.api.dsl.check;
 
 import java.util.Objects;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.TimeoutStepWrapper;
-import io.gatling.core.check.extractor.css.CssExtractorFactory;
-import io.gatling.http.Predef;
+import io.gatling.core.Predef;
+import io.gatling.core.check.extractor.css.CssCheckBuilder;
+import io.gatling.core.check.extractor.css.CssSelectors;
+import io.gatling.core.check.extractor.jsonpath.JsonPathCheckBuilder;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.HttpBodyCssCheckBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.CssCheckBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
@@ -21,22 +22,19 @@ public final class JavaCheckSupport {
      * To prevent instantiation
      */
     private JavaCheckSupport() {
-        throw new AssertionError();
+        throw new AssertionError("No instance of JavaCheckSupport");
     }
 
-    public static HttpBodyCssCheckBuilderWrapper css(String selector, String nodeAttribute) {
+    public static CssCheckBuilderWrapper css(String selector, String nodeAttribute) {
         Objects.requireNonNull(selector);
         Objects.requireNonNull(nodeAttribute);
 
-        final CssExtractorFactory cssExtractorFactory = io.gatling.core.Predef.defaultCssExtractorFactory();
-        return new HttpBodyCssCheckBuilderWrapper(Predef.css(Expression.of(selector), nodeAttribute, cssExtractorFactory));
+        CssSelectors cssExtractor = io.gatling.core.Predef.defaultCssSelectors();
+        final CssCheckBuilder<String> cssCheckBuilder = Predef.css(Expression.of(selector), nodeAttribute, cssExtractor);
+        return new CssCheckBuilderWrapper(cssCheckBuilder);
     }
 
-    public static TimeoutStepWrapper wsListen() {
-        return new TimeoutStepWrapper(Predef.wsListen());
-    }
-
-    public static TimeoutStepWrapper wsAwait() {
-        return new TimeoutStepWrapper(Predef.wsAwait());
+    public static JsonPathCheckBuilder<String> jsonPath(final String path) {
+        return JsonPathCheckBuilder.jsonPath(Expression.of(path), Predef.defaultJsonPaths());
     }
 }

@@ -19,4 +19,8 @@ public interface PausesWrapper<STRUCTURE extends StructureBuilder, WRAPPER exten
 
         return newInstance((STRUCTURE) get().pause(Duration.apply(length, unit)));
     }
+
+    default WRAPPER pause(final long timeMillis) {
+        return pause(timeMillis, TimeUnit.MILLISECONDS);
+    }
 }

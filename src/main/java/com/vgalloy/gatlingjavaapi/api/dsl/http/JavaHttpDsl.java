@@ -1,33 +1,37 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.WsWrapper;
-import io.gatling.core.check.DefaultFindCheckBuilder;
-import io.gatling.http.HttpDsl;
-import io.gatling.http.Predef;
-import io.gatling.http.check.HttpCheck;
-import io.gatling.http.request.builder.Http;
+import io.gatling.http.check.ws.WsTextFrameCheck;
+import java.util.Objects;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
+import io.gatling.core.check.DefaultFindCheckBuilder;
+import io.gatling.core.session.SessionPrivateAttributes;
+import io.gatling.http.Predef;
+import io.gatling.http.action.ws.Ws;
+import io.gatling.http.check.HttpCheck;
+import io.gatling.http.check.ws.WsBinaryFrameCheck;
+import io.gatling.http.request.builder.Http;
+import io.gatling.http.response.Response;
+
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.DefaultFindCheckBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.WsWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
-import io.gatling.http.request.builder.ws.Ws;
-import io.gatling.http.response.Response;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
  *
  * @author Vincent Galloy.
  */
-public final class JavaHttpDSL {
+public final class JavaHttpDsl {
 
     /**
      * Constructor.
      * To prevent external instantiation
      */
-    private JavaHttpDSL() {
-        throw new AssertionError();
+    private JavaHttpDsl() {
+        throw new AssertionError("No instance of JavaHttpDsl");
     }
 
     public static HttpWrapper http(String requestName) {
@@ -40,7 +44,9 @@ public final class JavaHttpDSL {
     }
 
     public static WsWrapper ws(String requestName) {
-        return ws(requestName, Ws.DefaultWebSocketName());
+        final Expression<String> requestNameExpression = Expression.of(requestName);
+        final Ws ws = Predef.ws().apply(requestNameExpression, SessionPrivateAttributes.PrivateAttributePrefix() + "http.webSocket");
+        return new WsWrapper(ws);
     }
 
     public static WsWrapper ws(String requestName, String wsName) {
@@ -48,9 +54,18 @@ public final class JavaHttpDSL {
         return new WsWrapper(new Ws(requestNameExpression, wsName));
     }
 
+    public static WsBinaryFrameCheck checkBinaryMessage(final String name) {
+        Objects.requireNonNull(name, "name");
+        return Predef.ws().checkBinaryMessage(name);
+    }
+
+    public static WsTextFrameCheck checkTextMessage(final String name) {
+        Objects.requireNonNull(name, "name");
+        return Predef.ws().checkTextMessage(name);
+    }
+
     public static DefaultFindCheckBuilderWrapper status() {
-        @SuppressWarnings("unchecked")
-        final DefaultFindCheckBuilder<HttpCheck, Response, Response, Integer> status = (DefaultFindCheckBuilder) Predef.status();
+        @SuppressWarnings("unchecked") final DefaultFindCheckBuilder<HttpCheck, Response, Integer> status = (DefaultFindCheckBuilder) Predef.status();
         return new DefaultFindCheckBuilderWrapper(status);
     }
 }

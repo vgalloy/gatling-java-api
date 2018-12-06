@@ -2,13 +2,16 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.trait;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.function.Function;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
+import io.gatling.core.session.Session;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.StructureBuilder;
 
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
  * Created by Vincent Galloy on 28/02/2017.
@@ -38,5 +41,10 @@ public interface StructureBuilderWrapper<STRUCTURE extends StructureBuilder, WRA
             .map(ChainBuilderWrapper::get)
             .collect(ScalaHelper.toScalaList());
         return newInstance((STRUCTURE) get().exec(list));
+    }
+
+    @SuppressWarnings("unchecked")
+    default WRAPPER exec(final Function<Session, Session> sessionFunction) {
+        return newInstance((STRUCTURE) get().exec(Expression.fromFunction(sessionFunction)));
     }
 }

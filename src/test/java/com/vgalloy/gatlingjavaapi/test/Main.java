@@ -1,5 +1,11 @@
 package com.vgalloy.gatlingjavaapi.test;
 
+import static com.vgalloy.gatlingjavaapi.api.dsl.assertion.JavaAssertionSupport.global;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.exec;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.scenario;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
+import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDsl.http;
+
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingResultAnalyzer;
@@ -7,12 +13,6 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaGatlingRunner;
 import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import io.gatling.app.RunResult;
-
-import static com.vgalloy.gatlingjavaapi.api.dsl.assertion.JavaAssertionSupport.global;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
-import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
 
 public final class Main {
 

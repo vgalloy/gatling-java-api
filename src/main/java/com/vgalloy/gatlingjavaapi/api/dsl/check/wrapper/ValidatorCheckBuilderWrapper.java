@@ -1,32 +1,38 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
-import io.gatling.core.check.Check;
-import io.gatling.core.check.CheckBuilder;
-import io.gatling.core.check.ValidatorCheckBuilder;
-
 import java.util.Objects;
 import java.util.function.Supplier;
+
+import io.gatling.core.Predef;
+import io.gatling.core.check.CheckBuilder;
+import io.gatling.core.check.CheckMaterializer;
+import io.gatling.core.check.ValidatorCheckBuilder;
 
 /**
  * Created by Vincent Galloy on 18/09/2018.
  *
  * @author Vincent Galloy
  */
-public class ValidatorCheckBuilderWrapper<C extends Check<R>, R, P, X> implements Supplier<ValidatorCheckBuilder<C, R, P, X>>, SaveAsWrapper<C, R, P, X> {
+public class ValidatorCheckBuilderWrapper<T, P, X> implements Supplier<ValidatorCheckBuilder<T, P, X>>, SaveAsWrapper<T, P, X> {
 
-    private final ValidatorCheckBuilder<C, R, P, X> validatorCheckBuilder;
+    private final ValidatorCheckBuilder<T, P, X> validatorCheckBuilder;
 
-    public ValidatorCheckBuilderWrapper(ValidatorCheckBuilder<C, R, P, X> validatorCheckBuilder) {
+    public ValidatorCheckBuilderWrapper(ValidatorCheckBuilder<T, P, X> validatorCheckBuilder) {
         this.validatorCheckBuilder = Objects.requireNonNull(validatorCheckBuilder);
     }
 
     @Override
-    public ValidatorCheckBuilder<C, R, P, X> get() {
+    public ValidatorCheckBuilder<T, P, X> get() {
         return validatorCheckBuilder;
     }
 
     @Override
-    public CheckBuilder<C, R, P, X> toCheckBuilder() {
-        return validatorCheckBuilder.exists();
+    public CheckBuilder<T, P, X> toCheckBuilder() {
+        return Predef.validatorCheckBuilder2CheckBuilder(validatorCheckBuilder);
+    }
+
+    @Override
+    public CheckMaterializer checkMaterializer() {
+        throw new UnsupportedOperationException();
     }
 }

@@ -22,7 +22,7 @@ public final class JavaErrorSupport {
      * To prevent external instantiation
      */
     private JavaErrorSupport() {
-        throw new AssertionError();
+        throw new AssertionError("No instance of JavaErrorSupport");
     }
 
     public static ChainBuilderWrapper tryMax(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {

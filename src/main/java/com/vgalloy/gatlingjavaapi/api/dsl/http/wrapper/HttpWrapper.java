@@ -54,7 +54,6 @@ public final class HttpWrapper {
         return new HttpRequestBuilderWrapper(http.patch(requestExpression));
     }
 
-
     public HttpRequestBuilderWrapper delete(String requestUrl) {
         Objects.requireNonNull(requestUrl);
 

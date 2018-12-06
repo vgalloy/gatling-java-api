@@ -23,7 +23,7 @@ public final class ScalaHelper {
      * To prevent instantiation
      */
     private ScalaHelper() {
-        throw new AssertionError();
+        throw new AssertionError("No instance of ScalaHelper");
     }
 
     @SafeVarargs

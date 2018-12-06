@@ -22,7 +22,7 @@ public final class JavaLoopSupport {
      * To prevent external instantiation
      */
     private JavaLoopSupport() {
-        throw new AssertionError();
+        throw new AssertionError("No instance of JavaLoopSupport");
     }
 
     public static ChainBuilderWrapper repeat(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {

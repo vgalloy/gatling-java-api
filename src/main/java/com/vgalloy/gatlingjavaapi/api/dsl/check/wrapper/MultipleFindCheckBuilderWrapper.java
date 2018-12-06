@@ -1,9 +1,10 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
-import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
-import io.gatling.core.check.*;
+import io.gatling.core.check.MultipleFindCheckBuilder;
 import io.gatling.core.check.extractor.Extractor;
 import scala.collection.Seq;
+
+import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 
 /**
@@ -11,8 +12,8 @@ import scala.collection.Seq;
  *
  * @author Vincent Galloy
  */
-public interface MultipleFindCheckBuilderWrapper<C extends Check<R>, R, P, X, STRUCTURE extends MultipleFindCheckBuilder<C, R, P, X>>
-    extends FindCheckBuilderWrapper<C, R, P, X, STRUCTURE> {
+public interface MultipleFindCheckBuilderWrapper<T, P, X, STRUCTURE extends MultipleFindCheckBuilder<T, P, X>>
+    extends FindCheckBuilderWrapper<T, P, X, STRUCTURE> {
 
     Expression<Extractor<P, String>> findExtractor(int occurrence);
 
@@ -20,19 +21,19 @@ public interface MultipleFindCheckBuilderWrapper<C extends Check<R>, R, P, X, ST
 
     Expression<Extractor<P, Object>> countExtractor();
 
-    default ValidatorCheckBuilderWrapper<C, R, P, X> find() {
+    default ValidatorCheckBuilderWrapper<T, P, X> find() {
         return find(0);
     }
 
-    default ValidatorCheckBuilderWrapper<C, R, P, X> find(int occurrence) {
+    default ValidatorCheckBuilderWrapper<T, P, X> find(int occurrence) {
         return new ValidatorCheckBuilderWrapper<>(get().find(occurrence));
     }
 
-    default ValidatorCheckBuilderWrapper<C, R, P, Seq<X>> findAll() {
+    default ValidatorCheckBuilderWrapper<T, P, Seq<X>> findAll() {
         return new ValidatorCheckBuilderWrapper<>(get().findAll());
     }
 
-    default ValidatorCheckBuilderWrapper<C, R, P, Object> count() {
+    default ValidatorCheckBuilderWrapper<T, P, Object> count() {
         return new ValidatorCheckBuilderWrapper<>(get().count());
     }
 }

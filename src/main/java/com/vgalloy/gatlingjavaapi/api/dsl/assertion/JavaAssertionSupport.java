@@ -17,7 +17,7 @@ public final class JavaAssertionSupport {
      * To prevent instantiation
      */
     private JavaAssertionSupport() {
-        throw new AssertionError();
+        throw new AssertionError("No instance of JavaAssertionSupport");
     }
 
     public static AssertionWithPath global() {

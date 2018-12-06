@@ -7,10 +7,10 @@ import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.SimulationWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.exec;
-import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDSL.scenario;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.exec;
+import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaCoreDsl.scenario;
 import static com.vgalloy.gatlingjavaapi.api.dsl.core.JavaInjectionSupport.atOnceUsers;
-import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDSL.http;
+import static com.vgalloy.gatlingjavaapi.api.dsl.http.JavaHttpDsl.http;
 
 /**
  * Created by Vincent Galloy on 23/02/2017.

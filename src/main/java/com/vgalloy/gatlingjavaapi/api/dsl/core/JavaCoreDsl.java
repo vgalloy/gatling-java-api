@@ -1,29 +1,26 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.core;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ActionBuilderSupplier;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 import io.gatling.core.Predef;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.ScenarioBuilder;
-import io.gatling.http.action.sync.HttpRequestActionBuilder;
 import scala.collection.immutable.List$;
-
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpRequestBuilderWrapper;
-import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ScenarioBuilderWrapper;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
  *
  * @author Vincent Galloy.
  */
-public final class JavaCoreDSL {
+public final class JavaCoreDsl {
 
     /**
      * Constructor.
      * To prevent instantiation
      */
-    private JavaCoreDSL() {
-        throw new AssertionError();
+    private JavaCoreDsl() {
+        throw new AssertionError("No instance of JavaCoreDsl");
     }
 
     public static ScenarioBuilderWrapper scenario(String scenarioName) {

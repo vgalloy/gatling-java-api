@@ -5,6 +5,7 @@ import java.util.Objects;
 import akka.actor.ActorSystem;
 import io.gatling.app.RunResult;
 import io.gatling.app.Runner;
+import io.gatling.commons.util.DefaultClock;
 import io.gatling.core.config.GatlingConfiguration;
 import io.gatling.core.scenario.Simulation;
 import scala.Option;
@@ -34,7 +35,7 @@ public enum JavaGatlingRunnerImpl implements JavaGatlingRunner {
         final GatlingConfiguration conf = GatlingConfiguration.load(Map$.MODULE$.empty());
         final String actorSystemName = "GatlingSystem" /* + uuid.toString()*/;
         final ActorSystem actorSystem = ActorSystem.create(actorSystemName, GatlingConfiguration.loadActorSystemConfiguration());
-        final Runner runner = new Runner(actorSystem, conf);
+        final io.gatling.app.Runner runner = new Runner(actorSystem, new DefaultClock(),conf);
 
         @SuppressWarnings("unchecked")
         final Option<Class<Simulation>> clazz = new Some<>((Class<Simulation>) simulationClass);

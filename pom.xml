@@ -21,7 +21,7 @@
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 
         <!-- Gatling -->
-        <gatling.version>2.3.1</gatling.version>
+        <gatling.version>3.0.1</gatling.version>
 
         <!-- Test -->
         <spring-boot.version>2.1.1.RELEASE</spring-boot.version>

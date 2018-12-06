@@ -26,7 +26,7 @@ public final class HttpProtocolBuilderWrapper implements Supplier<HttpProtocolBu
     }
 
     public HttpProtocolBuilderWrapper baseURL(String baseUrl) {
-        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.baseURL(baseUrl));
+        return new HttpProtocolBuilderWrapper(httpProtocolBuilder.baseUrl(baseUrl));
     }
 
     public HttpProtocolBuilderWrapper acceptHeader(String acceptHeader) {
