@@ -3,7 +3,7 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core;
 import io.gatling.core.Predef;
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.ScenarioBuilder;
-import io.gatling.http.action.sync.HttpRequestActionBuilder;
+import io.gatling.http.action.HttpRequestActionBuilder;
 import scala.collection.immutable.List$;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;

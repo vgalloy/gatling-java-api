@@ -7,9 +7,12 @@ import java.util.function.Supplier;
 import io.gatling.core.body.Body;
 import io.gatling.core.body.StringBody;
 import io.gatling.core.check.CheckBuilder;
+import io.gatling.core.check.CheckMaterializer;
+import io.gatling.http.Predef;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
 
+import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.CheckBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
@@ -60,10 +63,13 @@ public final class HttpRequestBuilderWrapper implements Supplier<HttpRequestBuil
         return new HttpRequestBuilderWrapper(httpRequestBuilder.body(stringBody));
     }
 
-    public HttpRequestBuilderWrapper check(CheckBuilder<HttpCheck, ?, ?, ?> checkBuilder) {
-        Objects.requireNonNull(checkBuilder);
+    public HttpRequestBuilderWrapper check(CheckBuilderWrapper checkBuilderWrapper) {
+        Objects.requireNonNull(checkBuilderWrapper);
 
-        return check(checkBuilder.build());
+        CheckBuilder<?, ?, ?> checkBuilder = checkBuilderWrapper.get();
+        CheckMaterializer/*<CssCheckType, HttpCheck , Response, NodeSelector>*/ materializer = checkBuilderWrapper.getCheckMaterializer();
+        HttpCheck httpCheck = Predef.checkBuilder2HttpCheck(checkBuilder, materializer);
+        return check(httpCheck);
     }
 
     public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {

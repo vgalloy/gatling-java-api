@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import io.gatling.core.structure.StructureBuilder;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.RecordSeqFeederBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.SourceFeederBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 
 /**
@@ -15,12 +15,12 @@ import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 public interface FeedsWrapper<STRUCTURE extends StructureBuilder, WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>> extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
     @SuppressWarnings("unchecked")
-    default WRAPPER feed(RecordSeqFeederBuilderWrapper recordSeqFeederBuilderWrapper) {
+    default WRAPPER feed(SourceFeederBuilderWrapper recordSeqFeederBuilderWrapper) {
         return feed(recordSeqFeederBuilderWrapper, 1);
     }
 
     @SuppressWarnings("unchecked")
-    default WRAPPER feed(RecordSeqFeederBuilderWrapper recordSeqFeederBuilderWrapper, int number) {
+    default WRAPPER feed(SourceFeederBuilderWrapper recordSeqFeederBuilderWrapper, int number) {
         Objects.requireNonNull(recordSeqFeederBuilderWrapper);
 
         return newInstance((STRUCTURE) get().feed(recordSeqFeederBuilderWrapper.get(), Expression.of(number)));

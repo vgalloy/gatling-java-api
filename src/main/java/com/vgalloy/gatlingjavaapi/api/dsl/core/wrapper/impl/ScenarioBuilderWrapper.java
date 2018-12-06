@@ -2,7 +2,8 @@ package com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl;
 
 import java.util.Objects;
 
-import io.gatling.core.controller.inject.InjectionStep;
+import io.gatling.core.Predef;
+import io.gatling.core.controller.inject.open.OpenInjectionStep;
 import io.gatling.core.structure.ScenarioBuilder;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.trait.StructureBuilderWrapper;
@@ -31,9 +32,8 @@ public final class ScenarioBuilderWrapper implements StructureBuilderWrapper<Sce
         return scenarioBuilder;
     }
 
-    public PopulationBuilderWrapper inject(InjectionStep... injectionStep) {
-        Objects.requireNonNull(injectionStep);
-
-        return new PopulationBuilderWrapper(scenarioBuilder.inject(ScalaHelper.map(injectionStep)));
+    public PopulationBuilderWrapper inject(OpenInjectionStep injectionProfileFactory, OpenInjectionStep... injectionProfileFactories) {
+        Objects.requireNonNull(injectionProfileFactories);
+        return new PopulationBuilderWrapper(scenarioBuilder.inject(injectionProfileFactory, ScalaHelper.map(injectionProfileFactories), Predef.openInjectionProfileFactory()));
     }
 }

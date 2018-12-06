@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import io.gatling.core.structure.ChainBuilder;
 import io.gatling.core.structure.StructureBuilder;
-import io.gatling.http.action.sync.HttpRequestActionBuilder;
+import io.gatling.http.action.HttpRequestActionBuilder;
 
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.HttpRequestBuilderWrapper;

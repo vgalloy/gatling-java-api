@@ -3,9 +3,9 @@ package com.vgalloy.gatlingjavaapi.api.dsl.feeder;
 import java.util.Objects;
 
 import io.gatling.core.Predef;
-import io.gatling.core.feeder.RecordSeqFeederBuilder;
+import io.gatling.core.feeder.SourceFeederBuilder;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.RecordSeqFeederBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.SourceFeederBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 
 /**
@@ -23,10 +23,10 @@ public final class JavaFeederSupport {
         throw new AssertionError();
     }
 
-    public static RecordSeqFeederBuilderWrapper csv(String fileName) {
+    public static SourceFeederBuilderWrapper csv(String fileName) {
         Objects.requireNonNull(fileName);
 
-        RecordSeqFeederBuilder<String> recordSeqFeederBuilder = Predef.csv(fileName, '\"', (char) 0, GatlingConfigurationSupplier.GATLING_CONFIGURATION);
-        return new RecordSeqFeederBuilderWrapper(recordSeqFeederBuilder);
+        SourceFeederBuilder<String> recordSeqFeederBuilder = Predef.csv(fileName, '\"', GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+        return new SourceFeederBuilderWrapper(recordSeqFeederBuilder);
     }
 }
