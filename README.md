@@ -5,7 +5,7 @@ maven clean install
 ```
 Or
 ```
-./gradlew build
+./gradlew publishToMavenLocal
 ```
 
 ## Use

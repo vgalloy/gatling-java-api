@@ -60,3 +60,4 @@ dependencies {
 
 integrationTest.mustRunAfter test
 check.dependsOn integrationTest
+publishToMavenLocal.dependsOn check
