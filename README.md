@@ -8,6 +8,19 @@ Or
 ./gradlew publishToMavenLocal
 ```
 
+## import
+```xml
+<dependency>
+    <groupId>com.vgalloy</groupId>
+    <artifactId>gatling-java-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+Or
+```
+compile "com.vgalloy:gatling-java-api:1.0-SNAPSHOT"
+```
+
 ## Use
 ```java
 package com.vgalloy.gatlingjavaapi.test;
