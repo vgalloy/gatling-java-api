@@ -1,3 +1,7 @@
+plugins {
+    id 'com.github.sherter.google-java-format' version '0.8'
+}
+
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
@@ -13,6 +17,10 @@ ext {
     javaVersion = '1.8'
     gatlingVersion = '3.0.3'
     springBootversion = '2.1.5.RELEASE'
+}
+
+googleJavaFormat {
+    toolVersion = '1.7'
 }
 
 configurations {
@@ -37,6 +45,10 @@ sourceSets {
 task integrationTest(type: Test) {
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+tasks.withType(JavaCompile) {
+    dependsOn ':googleJavaFormat'
 }
 
 publishing {

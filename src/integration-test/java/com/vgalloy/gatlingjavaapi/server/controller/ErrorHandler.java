@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ErrorHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    public String handle(Exception e) {
-        LOGGER.error("", e);
-        return e.getMessage();
-    }
+  @ExceptionHandler(Exception.class)
+  public String handle(Exception e) {
+    LOGGER.error("", e);
+    return e.getMessage();
+  }
 }
-

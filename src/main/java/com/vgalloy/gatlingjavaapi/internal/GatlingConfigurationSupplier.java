@@ -10,5 +10,6 @@ import scala.collection.mutable.Map$;
  */
 public class GatlingConfigurationSupplier {
 
-    public static final GatlingConfiguration GATLING_CONFIGURATION = GatlingConfiguration.load(Map$.MODULE$.empty());
+  public static final GatlingConfiguration GATLING_CONFIGURATION =
+      GatlingConfiguration.load(Map$.MODULE$.empty());
 }

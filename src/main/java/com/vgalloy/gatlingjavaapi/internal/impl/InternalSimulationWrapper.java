@@ -10,12 +10,12 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
  */
 public class InternalSimulationWrapper extends SimulationWrapper {
 
-    static JavaSimulation javaSimulation;
+  static JavaSimulation javaSimulation;
 
-    @Override
-    protected void configure() {
-        setUp(javaSimulation.getPopulationBuilderWrappers())
-            .protocols(javaSimulation.getHttpProtocolBuilderWrapper())
-            .assertion(javaSimulation.getAssertions());
-    }
+  @Override
+  protected void configure() {
+    setUp(javaSimulation.getPopulationBuilderWrappers())
+        .protocols(javaSimulation.getHttpProtocolBuilderWrapper())
+        .assertion(javaSimulation.getAssertions());
+  }
 }

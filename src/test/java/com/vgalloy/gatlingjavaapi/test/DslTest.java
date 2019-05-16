@@ -14,39 +14,36 @@ import org.junit.Test;
  */
 public final class DslTest {
 
-    @Test(expected = NullPointerException.class)
-    public void nullInjector() {
-        // WHEN
-        JavaSimulation.builder().scenario((PopulationBuilderWrapper[]) null);
+  @Test(expected = NullPointerException.class)
+  public void nullInjector() {
+    // WHEN
+    JavaSimulation.builder().scenario((PopulationBuilderWrapper[]) null);
 
-        // THEN
-        Assert.fail("Exception should occurred");
-    }
+    // THEN
+    Assert.fail("Exception should occurred");
+  }
 
-    @Test(expected = NullPointerException.class)
-    public void nullProtocol() {
-        // WHEN
-        JavaSimulation.builder().protocols((HttpProtocolBuilderWrapper[]) null);
+  @Test(expected = NullPointerException.class)
+  public void nullProtocol() {
+    // WHEN
+    JavaSimulation.builder().protocols((HttpProtocolBuilderWrapper[]) null);
 
-        // THEN
-        Assert.fail("Exception should occurred");
-    }
+    // THEN
+    Assert.fail("Exception should occurred");
+  }
 
-    @Test(expected = NullPointerException.class)
-    public void nullAssertion() {
-        // WHEN
-        JavaSimulation.builder().assertion((Assertion[]) null);
+  @Test(expected = NullPointerException.class)
+  public void nullAssertion() {
+    // WHEN
+    JavaSimulation.builder().assertion((Assertion[]) null);
 
-        // THEN
-        Assert.fail("Exception should occurred");
-    }
+    // THEN
+    Assert.fail("Exception should occurred");
+  }
 
-    @Test
-    public void nullValue() {
-        // WHEN
-        JavaSimulation.builder()
-            .scenario()
-            .protocols()
-            .assertion();
-    }
+  @Test
+  public void nullValue() {
+    // WHEN
+    JavaSimulation.builder().scenario().protocols().assertion();
+  }
 }

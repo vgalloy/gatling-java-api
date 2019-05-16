@@ -14,37 +14,41 @@ import scala.concurrent.duration.FiniteDuration;
  *
  * @author Vincent Galloy.
  */
-public final class WsConnectRequestBuilderSupplier extends RequestBuilderWrapper<WsConnectRequestBuilder, WsConnectRequestBuilderSupplier> implements ActionBuilderSupplier {
+public final class WsConnectRequestBuilderSupplier
+    extends RequestBuilderWrapper<WsConnectRequestBuilder, WsConnectRequestBuilderSupplier>
+    implements ActionBuilderSupplier {
 
-    private final WsConnectRequestBuilder wsConnectRequestBuilder;
+  private final WsConnectRequestBuilder wsConnectRequestBuilder;
 
-    public WsConnectRequestBuilderSupplier(WsConnectRequestBuilder wsConnectRequestBuilder) {
-        this.wsConnectRequestBuilder = Objects.requireNonNull(wsConnectRequestBuilder);
-    }
+  public WsConnectRequestBuilderSupplier(WsConnectRequestBuilder wsConnectRequestBuilder) {
+    this.wsConnectRequestBuilder = Objects.requireNonNull(wsConnectRequestBuilder);
+  }
 
-    @Override
-    public WsConnectRequestBuilder get() {
-        return wsConnectRequestBuilder;
-    }
+  @Override
+  public WsConnectRequestBuilder get() {
+    return wsConnectRequestBuilder;
+  }
 
-    @Override
-    protected WsConnectRequestBuilderSupplier newInstance(WsConnectRequestBuilder newStructure) {
-        return new WsConnectRequestBuilderSupplier(newStructure);
-    }
+  @Override
+  protected WsConnectRequestBuilderSupplier newInstance(WsConnectRequestBuilder newStructure) {
+    return new WsConnectRequestBuilderSupplier(newStructure);
+  }
 
-    @Override
-    public WsConnectBuilder toActionBuilder() {
-        return WsConnectRequestBuilder.toActionBuilder(this.get());
-    }
+  @Override
+  public WsConnectBuilder toActionBuilder() {
+    return WsConnectRequestBuilder.toActionBuilder(this.get());
+  }
 
-    public WsConnectRequestBuilderSupplier subprotocol(final String subprotocol) {
-        Objects.requireNonNull(subprotocol, "subprotocol");
-        return newInstance(get().subprotocol(subprotocol));
-    }
+  public WsConnectRequestBuilderSupplier subprotocol(final String subprotocol) {
+    Objects.requireNonNull(subprotocol, "subprotocol");
+    return newInstance(get().subprotocol(subprotocol));
+  }
 
-    public WsConnectBuilderWrapper await(final long length, final TimeUnit unit, final WsTextFrameCheck wsTextFrameCheck) {
-        final FiniteDuration finiteDuration = FiniteDuration.apply(length, unit);
-        final WsConnectBuilder newInstance = toActionBuilder().await(finiteDuration, ScalaHelper.map(wsTextFrameCheck));
-        return new WsConnectBuilderWrapper(newInstance);
-    }
+  public WsConnectBuilderWrapper await(
+      final long length, final TimeUnit unit, final WsTextFrameCheck wsTextFrameCheck) {
+    final FiniteDuration finiteDuration = FiniteDuration.apply(length, unit);
+    final WsConnectBuilder newInstance =
+        toActionBuilder().await(finiteDuration, ScalaHelper.map(wsTextFrameCheck));
+    return new WsConnectBuilderWrapper(newInstance);
+  }
 }

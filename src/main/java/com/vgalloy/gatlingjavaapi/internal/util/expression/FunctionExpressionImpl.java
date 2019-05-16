@@ -1,11 +1,10 @@
 package com.vgalloy.gatlingjavaapi.internal.util.expression;
 
-import java.util.Objects;
-import java.util.function.Function;
-
 import io.gatling.commons.validation.Success;
 import io.gatling.commons.validation.Validation;
 import io.gatling.core.session.Session;
+import java.util.Objects;
+import java.util.function.Function;
 import scala.runtime.AbstractFunction1;
 
 /**
@@ -13,16 +12,17 @@ import scala.runtime.AbstractFunction1;
  *
  * @author Vincent Galloy.
  */
-final class FunctionExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>> implements Expression<TYPE> {
+final class FunctionExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>>
+    implements Expression<TYPE> {
 
-    private final Function<Session, TYPE> function;
+  private final Function<Session, TYPE> function;
 
-    FunctionExpressionImpl(Function<Session, TYPE> function) {
-        this.function = Objects.requireNonNull(function);
-    }
+  FunctionExpressionImpl(Function<Session, TYPE> function) {
+    this.function = Objects.requireNonNull(function);
+  }
 
-    @Override
-    public Validation<TYPE> apply(Session session) {
-        return new Success<>(function.apply(session));
-    }
+  @Override
+  public Validation<TYPE> apply(Session session) {
+    return new Success<>(function.apply(session));
+  }
 }

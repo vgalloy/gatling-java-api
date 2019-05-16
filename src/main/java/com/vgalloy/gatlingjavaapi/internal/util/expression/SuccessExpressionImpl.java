@@ -10,16 +10,17 @@ import scala.runtime.AbstractFunction1;
  *
  * @author Vincent Galloy.
  */
-final class SuccessExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>> implements Expression<TYPE> {
+final class SuccessExpressionImpl<TYPE> extends AbstractFunction1<Session, Validation<TYPE>>
+    implements Expression<TYPE> {
 
-    private final Success<TYPE> object;
+  private final Success<TYPE> object;
 
-    SuccessExpressionImpl(TYPE object) {
-        this.object = new Success<>(object);
-    }
+  SuccessExpressionImpl(TYPE object) {
+    this.object = new Success<>(object);
+  }
 
-    @Override
-    public Validation<TYPE> apply(Session session) {
-        return object;
-    }
+  @Override
+  public Validation<TYPE> apply(Session session) {
+    return object;
+  }
 }

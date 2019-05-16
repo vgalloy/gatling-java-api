@@ -9,5 +9,5 @@ import io.gatling.core.action.builder.ActionBuilder;
  */
 public interface ActionBuilderSupplier {
 
-    ActionBuilder toActionBuilder();
+  ActionBuilder toActionBuilder();
 }

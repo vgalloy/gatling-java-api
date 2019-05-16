@@ -15,19 +15,17 @@ import scala.collection.immutable.List$;
  */
 public final class JavaCoreDsl {
 
-    /**
-     * Constructor.
-     * To prevent instantiation
-     */
-    private JavaCoreDsl() {
-        throw new AssertionError("No instance of JavaCoreDsl");
-    }
+  /** Constructor. To prevent instantiation */
+  private JavaCoreDsl() {
+    throw new AssertionError("No instance of JavaCoreDsl");
+  }
 
-    public static ScenarioBuilderWrapper scenario(String scenarioName) {
-        return new ScenarioBuilderWrapper(new ScenarioBuilder(scenarioName, List$.MODULE$.empty()));
-    }
+  public static ScenarioBuilderWrapper scenario(String scenarioName) {
+    return new ScenarioBuilderWrapper(new ScenarioBuilder(scenarioName, List$.MODULE$.empty()));
+  }
 
-    public static ChainBuilderWrapper exec(ActionBuilderSupplier actionBuilderSupplier) {
-        return new ChainBuilderWrapper((ChainBuilder) Predef.exec(actionBuilderSupplier.toActionBuilder()));
-    }
+  public static ChainBuilderWrapper exec(ActionBuilderSupplier actionBuilderSupplier) {
+    return new ChainBuilderWrapper(
+        (ChainBuilder) Predef.exec(actionBuilderSupplier.toActionBuilder()));
+  }
 }

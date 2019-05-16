@@ -1,10 +1,9 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
-import java.util.Objects;
-import java.util.function.Supplier;
-
 import io.gatling.core.check.CheckBuilder;
 import io.gatling.core.check.CheckMaterializer;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Created by Vincent Galloy on 06/12/18.
@@ -13,16 +12,16 @@ import io.gatling.core.check.CheckMaterializer;
  */
 public abstract class CheckBuilderWrapper<T, X, P> implements Supplier<CheckBuilder<T, X, P>> {
 
-    private final CheckBuilder<T, X, P> checkBuilder;
+  private final CheckBuilder<T, X, P> checkBuilder;
 
-    public CheckBuilderWrapper(final CheckBuilder<T, X, P> checkBuilder) {
-        this.checkBuilder = Objects.requireNonNull(checkBuilder);
-    }
+  public CheckBuilderWrapper(final CheckBuilder<T, X, P> checkBuilder) {
+    this.checkBuilder = Objects.requireNonNull(checkBuilder);
+  }
 
-    @Override
-    public CheckBuilder<T, X, P> get() {
-        return checkBuilder;
-    }
+  @Override
+  public CheckBuilder<T, X, P> get() {
+    return checkBuilder;
+  }
 
-    public abstract CheckMaterializer getCheckMaterializer();
+  public abstract CheckMaterializer getCheckMaterializer();
 }

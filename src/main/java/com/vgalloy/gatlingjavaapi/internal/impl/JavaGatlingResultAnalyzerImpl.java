@@ -13,16 +13,18 @@ import io.gatling.charts.stats.LogFileReader;
  * @author Vincent Galloy.
  */
 public enum JavaGatlingResultAnalyzerImpl implements JavaGatlingResultAnalyzer {
-    INSTANCE;
+  INSTANCE;
 
-    @Override
-    public SimulationResult load(RunResult runResult) {
-        return new SimulationResult(new LogFileReader(runResult.runId(), GatlingConfigurationSupplier.GATLING_CONFIGURATION));
-    }
+  @Override
+  public SimulationResult load(RunResult runResult) {
+    return new SimulationResult(
+        new LogFileReader(runResult.runId(), GatlingConfigurationSupplier.GATLING_CONFIGURATION));
+  }
 
-    @Override
-    public void generateHtml(RunResult runResult) {
-        RunResultProcessor runResultProcessor = new RunResultProcessor(GatlingConfigurationSupplier.GATLING_CONFIGURATION);
-        runResultProcessor.processRunResult(runResult);
-    }
+  @Override
+  public void generateHtml(RunResult runResult) {
+    RunResultProcessor runResultProcessor =
+        new RunResultProcessor(GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+    runResultProcessor.processRunResult(runResult);
+  }
 }

@@ -1,13 +1,12 @@
 package com.vgalloy.gatlingjavaapi.api.service;
 
-import java.util.List;
-import java.util.Objects;
-
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import io.gatling.charts.stats.LogFileReader;
 import io.gatling.charts.stats.ResultsHolder;
 import io.gatling.commons.stats.assertion.AssertionResult;
 import io.gatling.commons.stats.assertion.AssertionValidator;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Vincent Galloy on 24/02/2017.
@@ -16,22 +15,21 @@ import io.gatling.commons.stats.assertion.AssertionValidator;
  */
 public final class SimulationResult {
 
-    private final LogFileReader logFileReader;
+  private final LogFileReader logFileReader;
 
-    public SimulationResult(LogFileReader logFileReader) {
-        this.logFileReader = Objects.requireNonNull(logFileReader);
-    }
+  public SimulationResult(LogFileReader logFileReader) {
+    this.logFileReader = Objects.requireNonNull(logFileReader);
+  }
 
-    public List<AssertionResult> getAssertionResult() {
-        return ScalaHelper.map(AssertionValidator.validateAssertions(logFileReader));
-    }
+  public List<AssertionResult> getAssertionResult() {
+    return ScalaHelper.map(AssertionValidator.validateAssertions(logFileReader));
+  }
 
-    public ResultsHolder getResultsHolder() {
-        return logFileReader.resultsHolder();
-    }
+  public ResultsHolder getResultsHolder() {
+    return logFileReader.resultsHolder();
+  }
 
-    public boolean isSuccess() {
-        return getAssertionResult().stream()
-            .allMatch(AssertionResult::result);
-    }
+  public boolean isSuccess() {
+    return getAssertionResult().stream().allMatch(AssertionResult::result);
+  }
 }

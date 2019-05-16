@@ -1,12 +1,10 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.feeder;
 
-import java.util.Objects;
-
-import io.gatling.core.Predef;
-import io.gatling.core.feeder.SourceFeederBuilder;
-
 import com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper.SourceFeederBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
+import io.gatling.core.Predef;
+import io.gatling.core.feeder.SourceFeederBuilder;
+import java.util.Objects;
 
 /**
  * Created by Vincent Galloy on 14/04/18.
@@ -15,18 +13,16 @@ import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
  */
 public final class JavaFeederSupport {
 
-    /**
-     * Constructor.
-     * To prevent external instantiation
-     */
-    private JavaFeederSupport() {
-        throw new AssertionError("No instance of JavaFeederSupport");
-    }
+  /** Constructor. To prevent external instantiation */
+  private JavaFeederSupport() {
+    throw new AssertionError("No instance of JavaFeederSupport");
+  }
 
-    public static SourceFeederBuilderWrapper csv(final String fileName) {
-        Objects.requireNonNull(fileName, "fileName");
+  public static SourceFeederBuilderWrapper csv(final String fileName) {
+    Objects.requireNonNull(fileName, "fileName");
 
-        SourceFeederBuilder<String> recordSeqFeederBuilder = Predef.csv(fileName, '\"', GatlingConfigurationSupplier.GATLING_CONFIGURATION);
-        return new SourceFeederBuilderWrapper(recordSeqFeederBuilder);
-    }
+    SourceFeederBuilder<String> recordSeqFeederBuilder =
+        Predef.csv(fileName, '\"', GatlingConfigurationSupplier.GATLING_CONFIGURATION);
+    return new SourceFeederBuilderWrapper(recordSeqFeederBuilder);
+  }
 }

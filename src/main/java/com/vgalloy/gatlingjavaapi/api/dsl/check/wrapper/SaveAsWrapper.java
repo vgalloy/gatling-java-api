@@ -11,19 +11,25 @@ import scala.Some;
  */
 public interface SaveAsWrapper<T, P, X> {
 
-    CheckBuilder<T, P, X> toCheckBuilder();
+  CheckBuilder<T, P, X> toCheckBuilder();
 
-    CheckMaterializer checkMaterializer();
+  CheckMaterializer checkMaterializer();
 
-    default CheckBuilderWrapper<T, P, X> saveAs(String key) {
-        final CheckBuilder<T, P, X> checkBuilder = toCheckBuilder();
-        final CheckBuilder<T, P, X> newInstance = checkBuilder.copy(checkBuilder.extractor(), checkBuilder.validator(), checkBuilder.displayActualValue(), checkBuilder.customName(), new Some(key));
-        return new CheckBuilderWrapper<T, P, X>(newInstance) {
+  default CheckBuilderWrapper<T, P, X> saveAs(String key) {
+    final CheckBuilder<T, P, X> checkBuilder = toCheckBuilder();
+    final CheckBuilder<T, P, X> newInstance =
+        checkBuilder.copy(
+            checkBuilder.extractor(),
+            checkBuilder.validator(),
+            checkBuilder.displayActualValue(),
+            checkBuilder.customName(),
+            new Some(key));
+    return new CheckBuilderWrapper<T, P, X>(newInstance) {
 
-            @Override
-            public CheckMaterializer getCheckMaterializer() {
-                return checkMaterializer();
-            }
-        };
-    }
+      @Override
+      public CheckMaterializer getCheckMaterializer() {
+        return checkMaterializer();
+      }
+    };
+  }
 }
