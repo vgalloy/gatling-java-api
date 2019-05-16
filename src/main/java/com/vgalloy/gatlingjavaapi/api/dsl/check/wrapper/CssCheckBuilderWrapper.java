@@ -1,5 +1,7 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
+import io.gatling.core.check.extractor.CriterionExtractor;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -11,6 +13,8 @@ import io.gatling.core.check.extractor.Extractor;
 import io.gatling.core.check.extractor.css.CssCheckBuilder;
 import io.gatling.core.check.extractor.css.CssCheckType;
 import jodd.lagarto.dom.NodeSelector;
+import scala.Option;
+import scala.Tuple2;
 import scala.collection.Seq;
 
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
@@ -33,16 +37,16 @@ public class CssCheckBuilderWrapper implements Supplier<CssCheckBuilder<String>>
         return cssCheckBuilder;
     }
 
-    public Expression<Extractor<NodeSelector, String>> findExtractor(int occurrence) {
-        return (Expression<Extractor<NodeSelector, String>>) cssCheckBuilder.findExtractor(occurrence);
+    public JavaExtractor<String> findExtractor(int occurrence) {
+        return (JavaExtractor<String>) cssCheckBuilder.findExtractor(occurrence);
     }
 
-    public Expression<Extractor<NodeSelector, Seq<String>>> findAllExtractor() {
-        return (Expression<Extractor<NodeSelector, Seq<String>>>) cssCheckBuilder.findAllExtractor();
+    public JavaExtractor<Seq<String>> findAllExtractor() {
+        return (JavaExtractor<Seq<String>>) cssCheckBuilder.findAllExtractor();
     }
 
-    public Expression<Extractor<NodeSelector, Object>> countExtractor() {
-        return (Expression<Extractor<NodeSelector, Object>>) cssCheckBuilder.countExtractor();
+    public JavaExtractor<Object> countExtractor() {
+        return (JavaExtractor<Object>) cssCheckBuilder.countExtractor();
     }
 
     @Override
@@ -54,5 +58,9 @@ public class CssCheckBuilderWrapper implements Supplier<CssCheckBuilder<String>>
     @Override
     public CheckMaterializer checkMaterializer() {
         return io.gatling.http.Predef.httpBodyCssCheckMaterializer(cssCheckBuilder.selectors());
+    }
+
+    public interface JavaExtractor<T> extends Expression<CriterionExtractor<NodeSelector, Tuple2<String, Option<String>>, T>> {
+
     }
 }
