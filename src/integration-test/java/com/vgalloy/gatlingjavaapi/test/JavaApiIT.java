@@ -61,4 +61,30 @@ public class JavaApiIT {
     javaGatlingResultAnalyzer.generateHtml(runResult);
     Assert.assertTrue(simulationResult.isSuccess());
   }
+
+  @Test
+  public void assertHeader() {
+    JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
+    JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
+
+    ScenarioBuilderWrapper scn =
+        scenario("MyScenario")
+            .exec(http("request_1").get("/hasHeader").header("testHeader", "value"));
+    HttpProtocolBuilderWrapper httpConf = http().baseURL("http://localhost:" + serverPort);
+
+    JavaSimulation javaSimulation =
+        JavaSimulation.builder()
+            .scenario(scn.inject(atOnceUsers(2)))
+            .protocols(httpConf)
+            .assertion(
+                global().successfulRequests().percent().gt(99.9d))
+            .build();
+
+    RunResult runResult = javaGatlingRunner.run(javaSimulation);
+    SimulationResult simulationResult = javaGatlingResultAnalyzer.load(runResult);
+
+    // THEN
+    javaGatlingResultAnalyzer.generateHtml(runResult);
+    Assert.assertTrue(simulationResult.isSuccess());
+  }
 }
