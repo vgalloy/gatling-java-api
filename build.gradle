@@ -15,6 +15,8 @@ version = '1.0-SNAPSHOT'
 
 ext {
     javaVersion = '1.8'
+    encoding = 'UTF-8'
+
     gatlingVersion = '3.0.3'
     springBootversion = '2.2.5.RELEASE'
 }
@@ -27,9 +29,6 @@ configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
 }
-
-sourceCompatibility = "$javaVersion"
-targetCompatibility = "$javaVersion"
 
 sourceSets {
     integrationTest {
@@ -49,6 +48,9 @@ task integrationTest(type: Test) {
 
 tasks.withType(JavaCompile) {
     dependsOn ':googleJavaFormat'
+    sourceCompatibility = "$javaVersion"
+    targetCompatibility = "$javaVersion"
+    options.encoding = "$encoding"
 }
 
 publishing {
