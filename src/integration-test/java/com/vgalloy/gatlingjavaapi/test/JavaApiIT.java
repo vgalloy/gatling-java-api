@@ -76,8 +76,7 @@ public class JavaApiIT {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(
-                global().successfulRequests().percent().gt(99.9d))
+            .assertion(global().successfulRequests().percent().gt(99.9d))
             .build();
 
     RunResult runResult = javaGatlingRunner.run(javaSimulation);
