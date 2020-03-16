@@ -1,10 +1,6 @@
 # Gatling java api
 ## Build
 ```
-maven clean install
-```
-Or
-```
 ./gradlew publishToMavenLocal
 ```
 
@@ -80,4 +76,3 @@ public final class Main {
     }
 }
 ```
-
