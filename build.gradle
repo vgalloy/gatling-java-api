@@ -2,7 +2,7 @@ plugins {
     id 'com.github.sherter.google-java-format' version '0.8'
 }
 
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'maven-publish'
 
 repositories {
@@ -19,6 +19,7 @@ ext {
 
     gatlingVersion = '3.0.3'
     springBootversion = '2.2.5.RELEASE'
+    junitVersion = '5.6.0'
 }
 
 googleJavaFormat {
@@ -39,6 +40,10 @@ sourceSets {
         }
         resources.srcDir file('src/integration-test/resources')
     }
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
 }
 
 task integrationTest(type: Test) {
@@ -70,6 +75,8 @@ dependencies {
 
     testCompile "org.springframework.boot:spring-boot-starter-web:$springBootversion"
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootversion"
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testCompile "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 integrationTest.mustRunAfter test

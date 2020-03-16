@@ -4,18 +4,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by Vincent Galloy on 28/02/2017.
  *
  * @author Vincent Galloy.
  */
-public final class ScalaHelperTest {
+final class ScalaHelperTest {
 
   @Test
-  public void orderArray() {
+  void orderArray() {
     // GIVEN
     Integer[] array = new Integer[] {1, 2, 3};
 
@@ -23,11 +23,11 @@ public final class ScalaHelperTest {
     scala.collection.immutable.List<Integer> result = ScalaHelper.map(array);
 
     // THEN
-    Assert.assertEquals(Integer.valueOf(1), result.apply(0));
+    Assertions.assertEquals(Integer.valueOf(1), result.apply(0));
   }
 
   @Test
-  public void orderList() {
+  void orderList() {
     // GIVEN
     List<Integer> list = Arrays.asList(1, 2, 3);
 
@@ -36,11 +36,11 @@ public final class ScalaHelperTest {
         list.stream().collect(ScalaHelper.toScalaList());
 
     // THEN
-    Assert.assertEquals(Integer.valueOf(1), result.apply(0));
+    Assertions.assertEquals(Integer.valueOf(1), result.apply(0));
   }
 
   @Test
-  public void mapConversion() {
+  void mapConversion() {
     // GIVEN
     Map<Integer, String> map = new HashMap<>();
     map.put(1, "one");
@@ -51,8 +51,8 @@ public final class ScalaHelperTest {
     scala.collection.immutable.Map<Integer, String> result = ScalaHelper.map(map);
 
     // THEN
-    Assert.assertEquals("one", result.apply(1));
-    Assert.assertEquals("two", result.apply(2));
-    Assert.assertEquals("three", result.apply(3));
+    Assertions.assertEquals("one", result.apply(1));
+    Assertions.assertEquals("two", result.apply(2));
+    Assertions.assertEquals("three", result.apply(3));
   }
 }

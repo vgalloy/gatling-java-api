@@ -14,28 +14,25 @@ import com.vgalloy.gatlingjavaapi.api.service.JavaSimulation;
 import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import com.vgalloy.gatlingjavaapi.server.TestServerConfig;
 import io.gatling.app.RunResult;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Vincent Galloy on 27/02/2017.
  *
  * @author Vincent Galloy.
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(
     classes = TestServerConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class JavaApiIT {
+class JavaApiIT {
 
   @LocalServerPort private int serverPort;
 
   @Test
-  public void full() {
+  void full() {
     JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
     JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 
@@ -49,7 +46,7 @@ public class JavaApiIT {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(
+            .assertions(
                 global().responseTime().mean().lt(1_000),
                 global().successfulRequests().percent().gt(99.9d))
             .build();
@@ -59,7 +56,7 @@ public class JavaApiIT {
 
     // THEN
     javaGatlingResultAnalyzer.generateHtml(runResult);
-    Assert.assertTrue(simulationResult.isSuccess());
+    Assertions.assertTrue(simulationResult.isSuccess());
   }
 
   @Test
@@ -76,7 +73,7 @@ public class JavaApiIT {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(global().successfulRequests().percent().gt(99.9d))
+            .assertions(global().successfulRequests().percent().gt(99.9d))
             .build();
 
     RunResult runResult = javaGatlingRunner.run(javaSimulation);
@@ -84,6 +81,6 @@ public class JavaApiIT {
 
     // THEN
     javaGatlingResultAnalyzer.generateHtml(runResult);
-    Assert.assertTrue(simulationResult.isSuccess());
+    Assertions.assertTrue(simulationResult.isSuccess());
   }
 }

@@ -14,38 +14,35 @@ import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import com.vgalloy.gatlingjavaapi.server.TestServerConfig;
 import com.vgalloy.gatlingjavaapi.simulation.AssertionSimulation;
 import io.gatling.app.RunResult;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Vincent Galloy on 23/02/2017.
  *
  * @author Vincent Galloy.
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(
     classes = TestServerConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ResultAnalyzerIT {
+class ResultAnalyzerIT {
 
   @LocalServerPort private int serverPort;
 
   @Test
-  public void simple() {
+  void simple() {
     AssertionSimulation.port = serverPort;
     RunResult runResult = JavaGatlingRunner.getInstance().run(AssertionSimulation.class);
     SimulationResult simulationResult = JavaGatlingResultAnalyzer.getInstance().load(runResult);
 
-    Assert.assertFalse(simulationResult.isSuccess());
+    Assertions.assertFalse(simulationResult.isSuccess());
     JavaGatlingResultAnalyzer.getInstance().generateHtml(runResult);
   }
 
   @Test
-  public void generation() {
+  void generation() {
     JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
     JavaGatlingResultAnalyzer javaGatlingResultAnalyzer = JavaGatlingResultAnalyzer.getInstance();
 
@@ -56,7 +53,7 @@ public class ResultAnalyzerIT {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(
+            .assertions(
                 global().responseTime().max().lt(2),
                 global().successfulRequests().percent().gt(105d))
             .build();

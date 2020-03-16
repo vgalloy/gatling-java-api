@@ -30,7 +30,7 @@ public final class Main {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(
+            .assertions(
                 global().responseTime().mean().lt(1_000),
                 global().successfulRequests().percent().gt(99.9d))
             .build();

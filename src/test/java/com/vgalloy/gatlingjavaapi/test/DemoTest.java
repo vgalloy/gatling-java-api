@@ -15,22 +15,22 @@ import com.vgalloy.gatlingjavaapi.api.service.SimulationResult;
 import io.gatling.app.RunResult;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by Vincent Galloy on 08/04/17.
  *
  * @author Vincent Galloy
  */
-public final class DemoTest {
+final class DemoTest {
 
   private JavaGatlingRunner javaGatlingRunner = JavaGatlingRunner.getInstance();
   private JavaGatlingResultAnalyzer javaGatlingResultAnalyzer =
       JavaGatlingResultAnalyzer.getInstance();
 
   @Test
-  public void fatTest() {
+  void fatTest() {
     ScenarioBuilderWrapper scn =
         scenario("MyScenario")
             .exec(http("request_1").get("/home").check(status().is(200)))
@@ -47,7 +47,7 @@ public final class DemoTest {
         JavaSimulation.builder()
             .scenario(scn.inject(atOnceUsers(2)))
             .protocols(httpConf)
-            .assertion(
+            .assertions(
                 global().responseTime().max().lt(2),
                 global().successfulRequests().percent().gt(105d))
             .build();
@@ -57,6 +57,6 @@ public final class DemoTest {
 
     // THEN
     javaGatlingResultAnalyzer.generateHtml(runResult);
-    Assert.assertFalse(simulationResult.isSuccess());
+    Assertions.assertFalse(simulationResult.isSuccess());
   }
 }

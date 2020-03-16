@@ -56,22 +56,22 @@ public final class JavaSimulation {
     private final List<HttpProtocolBuilderWrapper> httpProtocolBuilderWrappers = new ArrayList<>();
     private final List<Assertion> assertions = new ArrayList<>();
 
-    public Builder scenario(PopulationBuilderWrapper... populationBuilderWrappers) {
-      Objects.requireNonNull(populationBuilderWrappers);
+    public Builder scenario(final PopulationBuilderWrapper... populationBuilderWrappers) {
+      Objects.requireNonNull(populationBuilderWrappers, "populationBuilderWrappers");
 
       this.populationBuilderWrappers.addAll(Arrays.asList(populationBuilderWrappers));
       return this;
     }
 
-    public Builder protocols(HttpProtocolBuilderWrapper... httpProtocolBuilderWrapper) {
-      Objects.requireNonNull(httpProtocolBuilderWrapper);
+    public Builder protocols(final HttpProtocolBuilderWrapper... httpProtocolBuilderWrapper) {
+      Objects.requireNonNull(httpProtocolBuilderWrapper, "httpProtocolBuilderWrapper");
 
       this.httpProtocolBuilderWrappers.addAll(Arrays.asList(httpProtocolBuilderWrapper));
       return this;
     }
 
-    public Builder assertion(Assertion... assertions) {
-      Objects.requireNonNull(assertions);
+    public Builder assertions(final Assertion... assertions) {
+      Objects.requireNonNull(assertions, "assertions");
 
       this.assertions.addAll(Arrays.asList(assertions));
       return this;
