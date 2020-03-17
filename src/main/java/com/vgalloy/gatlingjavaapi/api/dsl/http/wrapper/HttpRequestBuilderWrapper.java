@@ -14,6 +14,7 @@ import io.gatling.http.Predef;
 import io.gatling.http.action.HttpRequestActionBuilder;
 import io.gatling.http.check.HttpCheck;
 import io.gatling.http.request.builder.HttpRequestBuilder;
+import io.gatling.http.response.Response;
 import java.util.Objects;
 
 /**
@@ -56,18 +57,19 @@ public final class HttpRequestBuilderWrapper
     return newInstance(httpRequestBuilder.body(stringBody));
   }
 
-  public HttpRequestBuilderWrapper check(CheckBuilderWrapper checkBuilderWrapper) {
-    Objects.requireNonNull(checkBuilderWrapper);
+  public <A, T> HttpRequestBuilderWrapper check(
+      final CheckBuilderWrapper<A, T, ?> checkBuilderWrapper) {
+    Objects.requireNonNull(checkBuilderWrapper, "checkBuilderWrapper");
 
-    CheckBuilder<?, ?, ?> checkBuilder = checkBuilderWrapper.get();
-    CheckMaterializer /*<CssCheckType, HttpCheck , Response, NodeSelector>*/ materializer =
-        checkBuilderWrapper.getCheckMaterializer();
-    HttpCheck httpCheck = Predef.checkBuilder2HttpCheck(checkBuilder, materializer);
+    final CheckBuilder<A, T, ?> checkBuilder = checkBuilderWrapper.get();
+    final CheckMaterializer<A, HttpCheck, Response, T> materializer =
+        checkBuilderWrapper.getMaterializer();
+    final HttpCheck httpCheck = Predef.checkBuilder2HttpCheck(checkBuilder, materializer);
     return check(httpCheck);
   }
 
-  public HttpRequestBuilderWrapper check(HttpCheck httpCheck) {
-    Objects.requireNonNull(httpCheck);
+  public HttpRequestBuilderWrapper check(final HttpCheck httpCheck) {
+    Objects.requireNonNull(httpCheck, "httpCheck");
 
     return newInstance(httpRequestBuilder.check(ScalaHelper.map(httpCheck)));
   }

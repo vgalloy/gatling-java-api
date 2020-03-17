@@ -41,7 +41,10 @@ public final class AdvancedSimulationStep05 extends SimulationWrapper {
                     .check(
                         css("a:contains('${searchComputerName}')", "href").saveAs("computerURL")))
             .pause(1, TimeUnit.SECONDS)
-            .exec(http("Select").get("${computerURL}").check(status().is(200)))
+            .exec(
+                http("Select")
+                    .get("${computerURL}")
+                    .check(status().toValidatorCheckBuilder().is(200)))
             .pause(1, TimeUnit.SECONDS);
   }
 
@@ -73,6 +76,7 @@ public final class AdvancedSimulationStep05 extends SimulationWrapper {
                             .formParam("company", "37")
                             .check(
                                 status()
+                                    .toValidatorCheckBuilder()
                                     .is(session -> 200 + ThreadLocalRandom.current().nextInt(2)))))
             .exitHereIfFailed();
   }

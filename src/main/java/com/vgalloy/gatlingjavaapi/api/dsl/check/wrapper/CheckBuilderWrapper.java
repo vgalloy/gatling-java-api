@@ -2,6 +2,8 @@ package com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper;
 
 import io.gatling.core.check.CheckBuilder;
 import io.gatling.core.check.CheckMaterializer;
+import io.gatling.http.check.HttpCheck;
+import io.gatling.http.response.Response;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -10,18 +12,24 @@ import java.util.function.Supplier;
  *
  * @author Vincent Galloy
  */
-public abstract class CheckBuilderWrapper<T, X, P> implements Supplier<CheckBuilder<T, X, P>> {
+public class CheckBuilderWrapper<T, P, X> implements Supplier<CheckBuilder<T, P, X>> {
 
-  private final CheckBuilder<T, X, P> checkBuilder;
+  private final CheckBuilder<T, P, X> instance;
+  private final CheckMaterializer<T, HttpCheck, Response, P> materializer;
 
-  public CheckBuilderWrapper(final CheckBuilder<T, X, P> checkBuilder) {
-    this.checkBuilder = Objects.requireNonNull(checkBuilder);
+  public CheckBuilderWrapper(
+      final CheckBuilder<T, P, X> instance,
+      final CheckMaterializer<T, HttpCheck, Response, P> materializer) {
+    this.instance = Objects.requireNonNull(instance, "instance");
+    this.materializer = Objects.requireNonNull(materializer, "materializer");
   }
 
   @Override
-  public CheckBuilder<T, X, P> get() {
-    return checkBuilder;
+  public CheckBuilder<T, P, X> get() {
+    return instance;
   }
 
-  public abstract CheckMaterializer getCheckMaterializer();
+  public CheckMaterializer<T, HttpCheck, Response, P> getMaterializer() {
+    return materializer;
+  }
 }

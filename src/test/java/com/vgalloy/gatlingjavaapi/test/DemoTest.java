@@ -33,7 +33,7 @@ final class DemoTest {
   void fatTest() {
     ScenarioBuilderWrapper scn =
         scenario("MyScenario")
-            .exec(http("request_1").get("/home").check(status().is(200)))
+            .exec(http("request_1").get("/home").check(status().toValidatorCheckBuilder().is(200)))
             .pause(1, TimeUnit.MILLISECONDS)
             .exec(
                 http("request2")

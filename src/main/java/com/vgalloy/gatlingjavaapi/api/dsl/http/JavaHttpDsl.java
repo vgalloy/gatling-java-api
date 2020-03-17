@@ -1,16 +1,18 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.http;
 
-import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.DefaultFindCheckBuilderWrapper;
+import com.vgalloy.gatlingjavaapi.api.dsl.check.wrapper.FindCheckBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpProtocolBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.HttpWrapper;
 import com.vgalloy.gatlingjavaapi.api.dsl.http.wrapper.WsWrapper;
 import com.vgalloy.gatlingjavaapi.internal.GatlingConfigurationSupplier;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
-import io.gatling.core.check.DefaultFindCheckBuilder;
+import io.gatling.core.check.CheckMaterializer;
+import io.gatling.core.check.FindCheckBuilder;
 import io.gatling.core.session.SessionPrivateAttributes;
 import io.gatling.http.Predef;
 import io.gatling.http.action.ws.Ws;
 import io.gatling.http.check.HttpCheck;
+import io.gatling.http.check.status.HttpStatusCheckType;
 import io.gatling.http.check.ws.WsBinaryFrameCheck;
 import io.gatling.http.check.ws.WsTextFrameCheck;
 import io.gatling.http.request.builder.Http;
@@ -64,10 +66,30 @@ public final class JavaHttpDsl {
     return Predef.ws().checkTextMessage(name);
   }
 
-  public static DefaultFindCheckBuilderWrapper status() {
-    @SuppressWarnings("unchecked")
-    final DefaultFindCheckBuilder<HttpCheck, Response, Integer> status =
-        (DefaultFindCheckBuilder) Predef.status();
-    return new DefaultFindCheckBuilderWrapper(status);
+  public static FindCheckBuilderWrapper<
+          HttpStatusCheckType,
+          Response,
+          Integer,
+          FindCheckBuilder<HttpStatusCheckType, Response, Integer>>
+      status() {
+    final FindCheckBuilder<HttpStatusCheckType, Response, Integer> status =
+        (FindCheckBuilder) Predef.status();
+    return new FindCheckBuilderWrapper<
+        HttpStatusCheckType,
+        Response,
+        Integer,
+        FindCheckBuilder<HttpStatusCheckType, Response, Integer>>() {
+
+      @Override
+      public FindCheckBuilder<HttpStatusCheckType, Response, Integer> get() {
+        return status;
+      }
+
+      @Override
+      public CheckMaterializer<HttpStatusCheckType, HttpCheck, Response, Response>
+          getMaterializer() {
+        return Predef.httpStatusCheckMaterializer();
+      }
+    };
   }
 }
