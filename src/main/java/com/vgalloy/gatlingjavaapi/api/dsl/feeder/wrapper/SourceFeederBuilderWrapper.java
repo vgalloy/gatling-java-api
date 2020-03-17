@@ -1,6 +1,6 @@
 package com.vgalloy.gatlingjavaapi.api.dsl.feeder.wrapper;
 
-import io.gatling.core.feeder.SourceFeederBuilder;
+import io.gatling.core.feeder.FeederBuilderBase;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -9,32 +9,33 @@ import java.util.function.Supplier;
  *
  * @author Vincent Galloy
  */
-public final class SourceFeederBuilderWrapper implements Supplier<SourceFeederBuilder<String>> {
+public final class SourceFeederBuilderWrapper<T extends FeederBuilderBase<String>>
+    implements Supplier<T> {
 
-  private final SourceFeederBuilder<String> recordSeqFeederBuilder;
+  private final T instance;
 
-  public SourceFeederBuilderWrapper(SourceFeederBuilder<String> recordSeqFeederBuilder) {
-    this.recordSeqFeederBuilder = Objects.requireNonNull(recordSeqFeederBuilder);
+  public SourceFeederBuilderWrapper(final T instance) {
+    this.instance = Objects.requireNonNull(instance, "instance");
   }
 
-  public SourceFeederBuilderWrapper queue() {
-    return new SourceFeederBuilderWrapper(recordSeqFeederBuilder.queue());
+  public SourceFeederBuilderWrapper<FeederBuilderBase<String>> queue() {
+    return new SourceFeederBuilderWrapper<>(instance.queue());
   }
 
-  public SourceFeederBuilderWrapper random() {
-    return new SourceFeederBuilderWrapper(recordSeqFeederBuilder.random());
+  public SourceFeederBuilderWrapper<FeederBuilderBase<String>> random() {
+    return new SourceFeederBuilderWrapper<>(instance.random());
   }
 
-  public SourceFeederBuilderWrapper shuffle() {
-    return new SourceFeederBuilderWrapper(recordSeqFeederBuilder.shuffle());
+  public SourceFeederBuilderWrapper<FeederBuilderBase<String>> shuffle() {
+    return new SourceFeederBuilderWrapper<>(instance.shuffle());
   }
 
-  public SourceFeederBuilderWrapper circular() {
-    return new SourceFeederBuilderWrapper(recordSeqFeederBuilder.circular());
+  public SourceFeederBuilderWrapper<FeederBuilderBase<String>> circular() {
+    return new SourceFeederBuilderWrapper<>(instance.circular());
   }
 
   @Override
-  public SourceFeederBuilder<String> get() {
-    return recordSeqFeederBuilder;
+  public T get() {
+    return instance;
   }
 }
