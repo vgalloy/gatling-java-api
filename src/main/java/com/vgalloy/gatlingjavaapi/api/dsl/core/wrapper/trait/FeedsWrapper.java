@@ -15,7 +15,6 @@ public interface FeedsWrapper<
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
-  @SuppressWarnings("unchecked")
   default WRAPPER feed(SourceFeederBuilderWrapper recordSeqFeederBuilderWrapper) {
     return feed(recordSeqFeederBuilderWrapper, 1);
   }

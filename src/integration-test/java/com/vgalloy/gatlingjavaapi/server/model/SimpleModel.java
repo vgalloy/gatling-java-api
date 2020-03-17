@@ -1,13 +1,11 @@
 package com.vgalloy.gatlingjavaapi.server.model;
 
-import java.io.Serializable;
-
 /**
  * Created by Vincent Galloy on 04/06/17.
  *
  * @author Vincent Galloy
  */
-public final class SimpleModel implements Serializable {
+public final class SimpleModel {
 
   private int id;
   private String name;

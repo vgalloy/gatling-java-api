@@ -40,7 +40,7 @@ final class DemoTest {
                     .post("/post")
                     .headers(Collections.emptyMap())
                     .formParam("name", "value")
-                /*.check(status.is(session -> 200))*/ );
+                    .check(status().toValidatorCheckBuilder().is(session -> 200)));
     HttpProtocolBuilderWrapper httpConf = http().baseURL("http://localhost:" + 8080);
 
     JavaSimulation javaSimulation =

@@ -56,6 +56,10 @@ tasks.withType(JavaCompile) {
     sourceCompatibility = "$javaVersion"
     targetCompatibility = "$javaVersion"
     options.encoding = "$encoding"
+    options.compilerArgs += [
+            '-Xlint:all',
+//            '-Werror'
+    ]
 }
 
 publishing {

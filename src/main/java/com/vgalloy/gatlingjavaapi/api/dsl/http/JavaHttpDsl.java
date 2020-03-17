@@ -72,6 +72,7 @@ public final class JavaHttpDsl {
           Integer,
           FindCheckBuilder<HttpStatusCheckType, Response, Integer>>
       status() {
+    @SuppressWarnings({"unchecked", "rawtype"})
     final FindCheckBuilder<HttpStatusCheckType, Response, Integer> status =
         (FindCheckBuilder) Predef.status();
     return new FindCheckBuilderWrapper<
