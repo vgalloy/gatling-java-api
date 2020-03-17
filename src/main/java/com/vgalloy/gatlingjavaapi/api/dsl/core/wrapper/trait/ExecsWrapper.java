@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  * @author Vincent Galloy.
  */
 public interface ExecsWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends Supplier<STRUCTURE> {
 

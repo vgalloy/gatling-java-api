@@ -5,7 +5,7 @@ import com.vgalloy.gatlingjavaapi.api.dsl.core.wrapper.impl.ChainBuilderWrapper;
 import com.vgalloy.gatlingjavaapi.internal.util.ScalaHelper;
 import com.vgalloy.gatlingjavaapi.internal.util.expression.Expression;
 import io.gatling.core.session.Session;
-import io.gatling.core.structure.ChainBuilder;
+import io.gatling.core.structure.Execs;
 import io.gatling.core.structure.StructureBuilder;
 import java.util.Arrays;
 import java.util.Objects;
@@ -17,7 +17,7 @@ import java.util.function.Function;
  * @author Vincent Galloy.
  */
 public interface StructureBuilderWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER>,
         PausesWrapper<STRUCTURE, WRAPPER>,
@@ -25,26 +25,23 @@ public interface StructureBuilderWrapper<
         FeedsWrapper<STRUCTURE, WRAPPER>,
         ErrorWrapper<STRUCTURE, WRAPPER> {
 
-  @SuppressWarnings("unchecked")
-  default WRAPPER exec(ActionBuilderSupplier actionBuilderSupplier) {
+  default WRAPPER exec(final ActionBuilderSupplier actionBuilderSupplier) {
     Objects.requireNonNull(actionBuilderSupplier);
 
-    return newInstance((STRUCTURE) get().exec(actionBuilderSupplier.toActionBuilder()));
+    return newInstance(get().exec(actionBuilderSupplier.toActionBuilder()));
   }
 
-  @SuppressWarnings("unchecked")
-  default WRAPPER exec(ChainBuilderWrapper... structureSupportWrappers) {
+  default WRAPPER exec(final ChainBuilderWrapper... structureSupportWrappers) {
     Objects.requireNonNull(structureSupportWrappers);
 
-    scala.collection.immutable.List<ChainBuilder> list =
+    final scala.collection.immutable.List<Execs<?>> list =
         Arrays.stream(structureSupportWrappers)
             .map(ChainBuilderWrapper::get)
             .collect(ScalaHelper.toScalaList());
-    return newInstance((STRUCTURE) get().exec(list));
+    return newInstance(get().exec(list.toSeq()));
   }
 
-  @SuppressWarnings("unchecked")
   default WRAPPER exec(final Function<Session, Session> sessionFunction) {
-    return newInstance((STRUCTURE) get().exec(Expression.fromFunction(sessionFunction)));
+    return newInstance(get().exec(Expression.fromFunction(sessionFunction)));
   }
 }

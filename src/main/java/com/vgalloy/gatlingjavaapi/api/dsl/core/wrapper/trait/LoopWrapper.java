@@ -12,20 +12,22 @@ import java.util.UUID;
  * @author Vincent Galloy.
  */
 public interface LoopWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
-  @SuppressWarnings("unchecked")
-  default WRAPPER repeat(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
+  default WRAPPER repeat(
+      final int times, final ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
     return repeat(times, UUID.randomUUID().toString(), execsWrapper);
   }
 
   @SuppressWarnings("unchecked")
   default WRAPPER repeat(
-      int times, String counterName, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
-    Objects.requireNonNull(counterName);
-    Objects.requireNonNull(execsWrapper);
+      final int times,
+      final String counterName,
+      final ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
+    Objects.requireNonNull(counterName, "counterName");
+    Objects.requireNonNull(execsWrapper, "execsWrapper");
 
     return newInstance(
         (STRUCTURE) get().repeat(Expression.of(times), counterName, execsWrapper.get()));

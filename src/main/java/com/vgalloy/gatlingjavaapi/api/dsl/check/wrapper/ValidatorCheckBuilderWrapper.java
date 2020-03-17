@@ -28,7 +28,6 @@ public class ValidatorCheckBuilderWrapper<T, P, X>
       final CheckMaterializer<T, HttpCheck, Response, P> materializer) {
     this.instance = Objects.requireNonNull(instance, "instance");
     this.materializer = Objects.requireNonNull(materializer, "materializer");
-    ;
   }
 
   @Override

@@ -12,27 +12,23 @@ import java.util.UUID;
  * @author Vincent Galloy.
  */
 public interface ErrorWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
-  @SuppressWarnings("unchecked")
   default WRAPPER tryMax(int times, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
     return tryMax(times, UUID.randomUUID().toString(), execsWrapper);
   }
 
-  @SuppressWarnings("unchecked")
   default WRAPPER tryMax(
       int times, String counterName, ExecsWrapper<? extends ChainBuilder, ?> execsWrapper) {
     Objects.requireNonNull(counterName);
     Objects.requireNonNull(execsWrapper);
 
-    return newInstance(
-        (STRUCTURE) get().tryMax(Expression.of(times), counterName, execsWrapper.get()));
+    return newInstance(get().tryMax(Expression.of(times), counterName, execsWrapper.get()));
   }
 
-  @SuppressWarnings("unchecked")
   default WRAPPER exitHereIfFailed() {
-    return newInstance((STRUCTURE) get().exitHereIfFailed());
+    return newInstance(get().exitHereIfFailed());
   }
 }

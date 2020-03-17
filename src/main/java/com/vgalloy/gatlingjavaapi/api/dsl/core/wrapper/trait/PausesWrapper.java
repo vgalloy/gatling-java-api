@@ -11,15 +11,14 @@ import scala.concurrent.duration.Duration;
  * @author Vincent Galloy.
  */
 public interface PausesWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
-  @SuppressWarnings("unchecked")
   default WRAPPER pause(long length, TimeUnit unit) {
     Objects.requireNonNull(unit);
 
-    return newInstance((STRUCTURE) get().pause(Duration.apply(length, unit)));
+    return newInstance(get().pause(Duration.apply(length, unit)));
   }
 
   default WRAPPER pause(final long timeMillis) {

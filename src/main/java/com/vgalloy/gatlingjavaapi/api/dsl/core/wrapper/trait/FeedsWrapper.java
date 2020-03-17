@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author Vincent Galloy.
  */
 public interface FeedsWrapper<
-        STRUCTURE extends StructureBuilder,
+        STRUCTURE extends StructureBuilder<STRUCTURE>,
         WRAPPER extends StructureBuilderWrapper<STRUCTURE, WRAPPER>>
     extends ExecsWrapper<STRUCTURE, WRAPPER> {
 
